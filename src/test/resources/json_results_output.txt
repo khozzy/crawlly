@@ -1,0 +1,274 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ {
+
+    "version" : 2,
+    "query" : "Java, .NET, ASP, Software Developer, Python, Ruby, Oracle",
+    "location" : "Ireland",
+    "dupefilter" : true,
+
+    "highlight" : false,
+
+
+    "start" : 11,
+    "end" : 20,
+    "totalResults" : 1273,
+
+    "pageNumber" : 1,
+
+
+
+
+    "results" : [
+
+
+                {
+                    "jobtitle" : "ASP.NET C# Developer (SaaS , MVC , .NET 4.0)",
+                    "company" : "Vero Solutions",
+                    "city" : "Dublin",
+                    "state" : "D",
+                    "country" : "IE",
+                    "formattedLocation" : "Dublin",
+                    "source" : "Vero Solutions",
+                    "date" : "Fri, 06 Sep 2013 10:06:30 GMT",
+                    "snippet" : "ASP.NET C# Developer (SaaS , MVC &amp; .NET 4.0) SUMMARY A customer of Vero Solutions are looking to take on 9 experienced ASP.NET \/ C# Developers. This company... ",
+                    "url" : "http:\/\/ie.indeed.com\/viewjob?jk=bc293e9d3712a5fc&qd=VPHN0PdrcxncVkYNgwjvIVK2LRN73PL9MxUv2tSPaJPu0nWO3D2nrxAmX_Tmr0I0lF1tkuxYFf6MdAXsTWg3hx-vHtJLjyfqetGAIQKopQ207x6IsdVxcllsl466nr_GsxdYhmF5_TAlVCWAwBjZUj0s0T4hJ9RnbaOLuy7DdDkUFbb4-txqcxCTPmmG_XDu&indpubnum=5004251131744383&atk=18476rh8e19rh1rk",
+                    "onmousedown" : "indeed_clk(this, '6845');",
+                    "latitude" : 53.332417,
+                    "longitude" : -6.247253,
+                    "jobkey" : "bc293e9d3712a5fc",
+                    "sponsored" : false,
+                    "expired" : false,
+                    "formattedLocationFull" : "Dublin",
+                    "formattedRelativeTime" : "5 days ago"
+}
+
+            ,
+
+
+                {
+                    "jobtitle" : ".Net C# Developer - MVC 3\/4, ASP.NET, JQUERY",
+                    "company" : "",
+                    "city" : "Dublin",
+                    "state" : "D",
+                    "country" : "IE",
+                    "formattedLocation" : "Dublin",
+                    "source" : "CvWow.com",
+                    "date" : "Wed, 11 Sep 2013 17:50:09 GMT",
+                    "snippet" : "5 C# Software Developer - MVC 3\/4, ASP.NET, JQUERY - Financial Sector I am recruiting 2 x .NET Developers... with .NET Framework 4.5 (C#), ASP.NET MVC 4.0... ",
+                    "url" : "http:\/\/ie.indeed.com\/viewjob?jk=5797e7f033816af6&qd=VPHN0PdrcxncVkYNgwjvIVK2LRN73PL9MxUv2tSPaJPu0nWO3D2nrxAmX_Tmr0I0lF1tkuxYFf6MdAXsTWg3hx-vHtJLjyfqetGAIQKopQ207x6IsdVxcllsl466nr_GsxdYhmF5_TAlVCWAwBjZUj0s0T4hJ9RnbaOLuy7DdDkUFbb4-txqcxCTPmmG_XDu&indpubnum=5004251131744383&atk=18476rh8e19rh1rk",
+                    "onmousedown" : "indeed_clk(this, '6845');",
+                    "latitude" : 53.332417,
+                    "longitude" : -6.247253,
+                    "jobkey" : "5797e7f033816af6",
+                    "sponsored" : false,
+                    "expired" : false,
+                    "formattedLocationFull" : "Dublin",
+                    "formattedRelativeTime" : "1 hour ago"
+}
+
+            ,
+
+
+                {
+                    "jobtitle" : ".Net C# Developer - MVC 3\/4, ASP.NET, JQUERY",
+                    "company" : "CPL Solutions",
+                    "city" : "Dublin",
+                    "state" : "D",
+                    "country" : "IE",
+                    "formattedLocation" : "Dublin",
+                    "source" : "Career Architechs",
+                    "date" : "Wed, 11 Sep 2013 17:43:48 GMT",
+                    "snippet" : "5 C# Software Developer - MVC 3\/4, ASP.NET, JQUERY - Financial Sector I am recruiting 2 x .NET Developers... with .NET Framework 4.5 (C#), ASP.NET MVC 4.0... ",
+                    "url" : "http:\/\/ie.indeed.com\/viewjob?jk=e3136d429d5b00a7&qd=VPHN0PdrcxncVkYNgwjvIVK2LRN73PL9MxUv2tSPaJPu0nWO3D2nrxAmX_Tmr0I0lF1tkuxYFf6MdAXsTWg3hx-vHtJLjyfqetGAIQKopQ207x6IsdVxcllsl466nr_GsxdYhmF5_TAlVCWAwBjZUj0s0T4hJ9RnbaOLuy7DdDkUFbb4-txqcxCTPmmG_XDu&indpubnum=5004251131744383&atk=18476rh8e19rh1rk",
+                    "onmousedown" : "indeed_clk(this, '6845');",
+                    "latitude" : 53.332417,
+                    "longitude" : -6.247253,
+                    "jobkey" : "e3136d429d5b00a7",
+                    "sponsored" : false,
+                    "expired" : false,
+                    "formattedLocationFull" : "Dublin",
+                    "formattedRelativeTime" : "1 hour ago"
+}
+
+            ,
+
+
+                {
+                    "jobtitle" : "Senior Software Engineer\/Developer - Oracle PL\/SQL",
+                    "company" : "Fidelity Investments",
+                    "city" : "Dublin",
+                    "state" : "D",
+                    "country" : "IE",
+                    "formattedLocation" : "Dublin",
+                    "source" : "Fidelity Investments",
+                    "date" : "Wed, 11 Sep 2013 13:54:20 GMT",
+                    "snippet" : "Senior Software Engineer\/Developer - Oracle PL\/SQL... and India based teams. RESPONSIBILITIES: Oracle\/Java developer primary responsibility will be to develop... ",
+                    "url" : "http:\/\/ie.indeed.com\/viewjob?jk=d73d7052ee35903e&qd=VPHN0PdrcxncVkYNgwjvIVK2LRN73PL9MxUv2tSPaJPu0nWO3D2nrxAmX_Tmr0I0lF1tkuxYFf6MdAXsTWg3hx-vHtJLjyfqetGAIQKopQ207x6IsdVxcllsl466nr_GsxdYhmF5_TAlVCWAwBjZUj0s0T4hJ9RnbaOLuy7DdDkUFbb4-txqcxCTPmmG_XDu&indpubnum=5004251131744383&atk=18476rh8e19rh1rk",
+                    "onmousedown" : "indeed_clk(this, '6845');",
+                    "latitude" : 53.332417,
+                    "longitude" : -6.247253,
+                    "jobkey" : "d73d7052ee35903e",
+                    "sponsored" : false,
+                    "expired" : false,
+                    "formattedLocationFull" : "Dublin",
+                    "formattedRelativeTime" : "5 hours ago"
+}
+
+            ,
+
+
+                {
+                    "jobtitle" : ".Net Application Developer",
+                    "company" : "Conduit Group Ltd",
+                    "city" : "",
+                    "state" : "",
+                    "country" : "IE",
+                    "formattedLocation" : "Ireland",
+                    "source" : "nijobfinder",
+                    "date" : "Wed, 11 Sep 2013 12:34:16 GMT",
+                    "snippet" : "looking for a .Net Application Developer to join... include: 3 plus years of experience utilizing VB.NET, ASP.NET and SQL Server. Some exposure to report... ",
+                    "url" : "http:\/\/ie.indeed.com\/viewjob?jk=b98965d32a705bd5&qd=VPHN0PdrcxncVkYNgwjvIVK2LRN73PL9MxUv2tSPaJPu0nWO3D2nrxAmX_Tmr0I0lF1tkuxYFf6MdAXsTWg3hx-vHtJLjyfqetGAIQKopQ207x6IsdVxcllsl466nr_GsxdYhmF5_TAlVCWAwBjZUj0s0T4hJ9RnbaOLuy7DdDkUFbb4-txqcxCTPmmG_XDu&indpubnum=5004251131744383&atk=18476rh8e19rh1rk",
+                    "onmousedown" : "indeed_clk(this, '6845');",
+                    "jobkey" : "b98965d32a705bd5",
+                    "sponsored" : false,
+                    "expired" : false,
+                    "formattedLocationFull" : "Ireland",
+                    "formattedRelativeTime" : "6 hours ago"
+}
+
+            ,
+
+
+                {
+                    "jobtitle" : ".Net Developer VB.NET Finance Sector",
+                    "company" : "Candle (Melbourne)",
+                    "city" : "",
+                    "state" : "",
+                    "country" : "IE",
+                    "formattedLocation" : "Ireland",
+                    "source" : "nijobfinder",
+                    "date" : "Wed, 11 Sep 2013 12:35:04 GMT",
+                    "snippet" : "NET and C#.NET Proficient in all pillars of the .NET... Net 3.5 MS SQL Server 2008 Visual Studio 2008\/TFS VB.NET\/C#.NET ASP.NET, including style sheeting... ",
+                    "url" : "http:\/\/ie.indeed.com\/viewjob?jk=bb2244c157ef8afd&qd=VPHN0PdrcxncVkYNgwjvIVK2LRN73PL9MxUv2tSPaJPu0nWO3D2nrxAmX_Tmr0I0lF1tkuxYFf6MdAXsTWg3hx-vHtJLjyfqetGAIQKopQ207x6IsdVxcllsl466nr_GsxdYhmF5_TAlVCWAwBjZUj0s0T4hJ9RnbaOLuy7DdDkUFbb4-txqcxCTPmmG_XDu&indpubnum=5004251131744383&atk=18476rh8e19rh1rk",
+                    "onmousedown" : "indeed_clk(this, '6845');",
+                    "jobkey" : "bb2244c157ef8afd",
+                    "sponsored" : false,
+                    "expired" : false,
+                    "formattedLocationFull" : "Ireland",
+                    "formattedRelativeTime" : "6 hours ago"
+}
+
+            ,
+
+
+                {
+                    "jobtitle" : "Software Developer",
+                    "company" : "Career Decisions",
+                    "city" : "",
+                    "state" : "",
+                    "country" : "IE",
+                    "formattedLocation" : "Ireland",
+                    "source" : "nijobfinder",
+                    "date" : "Tue, 10 Sep 2013 13:10:34 GMT",
+                    "snippet" : "Software Developers - ASP.Net with C# Newcastle West, Co Limerick See full job specification on www.careerdecisions.ie Quicklink: http:\/\/www.nijobfinder.co... ",
+                    "url" : "http:\/\/ie.indeed.com\/viewjob?jk=ab0d48f089275bfa&qd=VPHN0PdrcxncVkYNgwjvIVK2LRN73PL9MxUv2tSPaJPu0nWO3D2nrxAmX_Tmr0I0lF1tkuxYFf6MdAXsTWg3hx-vHtJLjyfqetGAIQKopQ207x6IsdVxcllsl466nr_GsxdYhmF5_TAlVCWAwBjZUj0s0T4hJ9RnbaOLuy7DdDkUFbb4-txqcxCTPmmG_XDu&indpubnum=5004251131744383&atk=18476rh8e19rh1rk",
+                    "onmousedown" : "indeed_clk(this, '6845');",
+                    "jobkey" : "ab0d48f089275bfa",
+                    "sponsored" : false,
+                    "expired" : false,
+                    "formattedLocationFull" : "Ireland",
+                    "formattedRelativeTime" : "1 day ago"
+}
+
+            ,
+
+
+                {
+                    "jobtitle" : "ASP.NET DEVELOPER IN DUBLIN",
+                    "company" : "SOLAS CONSULTING GROUP",
+                    "city" : "South Dublin",
+                    "state" : "D",
+                    "country" : "IE",
+                    "formattedLocation" : "South Dublin, County Dublin",
+                    "source" : "RecruitIreland.com",
+                    "date" : "Mon, 09 Sep 2013 16:03:59 GMT",
+                    "snippet" : "The role is for ASP.Net Front End developer position... with C# and ASP.NET Strong development experience with .Net C# 4.0 (ASP.NET\/Web Development, WCF\/ Web... ",
+                    "url" : "http:\/\/ie.indeed.com\/viewjob?jk=11f0adabcfd4d061&qd=VPHN0PdrcxncVkYNgwjvIVK2LRN73PL9MxUv2tSPaJPu0nWO3D2nrxAmX_Tmr0I0lF1tkuxYFf6MdAXsTWg3hx-vHtJLjyfqetGAIQKopQ207x6IsdVxcllsl466nr_GsxdYhmF5_TAlVCWAwBjZUj0s0T4hJ9RnbaOLuy7DdDkUFbb4-txqcxCTPmmG_XDu&indpubnum=5004251131744383&atk=18476rh8e19rh1rk",
+                    "onmousedown" : "indeed_clk(this, '6845');",
+                    "latitude" : 53.307693,
+                    "longitude" : -6.395605,
+                    "jobkey" : "11f0adabcfd4d061",
+                    "sponsored" : false,
+                    "expired" : false,
+                    "formattedLocationFull" : "South Dublin, County Dublin",
+                    "formattedRelativeTime" : "2 days ago"
+}
+
+            ,
+
+
+                {
+                    "jobtitle" : "4+ years | ASP.NET | C# Developer",
+                    "company" : "Archer Recruitment",
+                    "city" : "",
+                    "state" : "KE",
+                    "country" : "IE",
+                    "formattedLocation" : "County Kildare",
+                    "source" : "Archer Recruitment",
+                    "date" : "Wed, 11 Sep 2013 15:17:28 GMT",
+                    "snippet" : "Title: 4+ years | ASP.NET | C# Developer Expanding... software development team Experience: 4+ years experience with ASP.NET 4+ years experience with C#... ",
+                    "url" : "http:\/\/ie.indeed.com\/viewjob?jk=8ebd3807199ba173&qd=VPHN0PdrcxncVkYNgwjvIVK2LRN73PL9MxUv2tSPaJPu0nWO3D2nrxAmX_Tmr0I0lF1tkuxYFf6MdAXsTWg3hx-vHtJLjyfqetGAIQKopQ207x6IsdVxcllsl466nr_GsxdYhmF5_TAlVCWAwBjZUj0s0T4hJ9RnbaOLuy7DdDkUFbb4-txqcxCTPmmG_XDu&indpubnum=5004251131744383&atk=18476rh8e19rh1rk",
+                    "onmousedown" : "indeed_clk(this, '6845');",
+                    "jobkey" : "8ebd3807199ba173",
+                    "sponsored" : false,
+                    "expired" : false,
+                    "formattedLocationFull" : "County Kildare",
+                    "formattedRelativeTime" : "3 hours ago"
+}
+
+            ,
+
+
+                {
+                    "jobtitle" : "Senior .NET Developer",
+                    "company" : "",
+                    "city" : "Dublin",
+                    "state" : "D",
+                    "country" : "IE",
+                    "formattedLocation" : "Dublin",
+                    "source" : "CvWow.com",
+                    "date" : "Wed, 11 Sep 2013 17:50:10 GMT",
+                    "snippet" : "in either (C#\/VB.NET), ASP.NET, MVC, Web development... experience in JAVA, JCR, Sling, RESTful is highly desirable. Experience of full software life cycle and... ",
+                    "url" : "http:\/\/ie.indeed.com\/viewjob?jk=06ac8cc98978402f&qd=VPHN0PdrcxncVkYNgwjvIVK2LRN73PL9MxUv2tSPaJPu0nWO3D2nrxAmX_Tmr0I0lF1tkuxYFf6MdAXsTWg3hx-vHtJLjyfqetGAIQKopQ207x6IsdVxcllsl466nr_GsxdYhmF5_TAlVCWAwBjZUj0s0T4hJ9RnbaOLuy7DdDkUFbb4-txqcxCTPmmG_XDu&indpubnum=5004251131744383&atk=18476rh8e19rh1rk",
+                    "onmousedown" : "indeed_clk(this, '6845');",
+                    "latitude" : 53.332417,
+                    "longitude" : -6.247253,
+                    "jobkey" : "06ac8cc98978402f",
+                    "sponsored" : false,
+                    "expired" : false,
+                    "formattedLocationFull" : "Dublin",
+                    "formattedRelativeTime" : "1 hour ago"
+}
+
+
+
+    ]
+}
