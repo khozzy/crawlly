@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="template/commonLayout.xhtml">
+
+        <ui:define name="header">
+            <h:link outcome="index" value="Crawler" styleClass="brand"/>
+
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li>
+                        <h:link outcome="index" value="Seed Pages"/>
+                    </li>
+                    <li class="active">
+                        <h:link outcome="configuration" value="Configure" />
+                    </li>
+                </ul>
+            </div>
+        </ui:define>
+
+        <ui:define name="content">
+
+            <!--<h:form>-->
+                <!--<p:poll id="queue_poll" interval="1" update=":queue:seedPages, :queue:currentStatus"/>-->
+            <!--</h:form>-->
+
+            <h3>Configuration</h3>
+
+            <f:view>
+                <h:form id="configurationForm">
+                    <h:panelGrid columns="3" cellpadding="5px;">
+
+                        <h:outputLabel for="bufferSize" value="Buffer size" />
+                        <h:inputText id="bufferSize" value="#{configurationController.bufferSize}" required="true">
+                            <f:convertNumber integerOnly="true" type="number" groupingUsed="false" />
+                        </h:inputText>
+                        <h:message for="bufferSize" errorStyle="color: red"/>
+
+                        <h:outputLabel for="respectRobots" value="Respect robots.txt"/>
+                        <h:selectBooleanCheckbox id="respectRobots" value="#{configurationController.respectRobots}"/>
+                        <h:message for="respectRobots" errorStyle="color:red" />
+
+                        <h:outputLabel for="limitHosts" value="Limit hosts to domain"/>
+                        <h:selectBooleanCheckbox id="limitHosts" value="#{configurationController.limitHost}"/>
+                        <h:message for="limitHosts" errorStyle="color:red" />
+
+                        <h:outputLabel for="maxUrl" value="Maximum URL to crawl per seed page" />
+                        <h:inputText id="maxUrl" value="#{configurationController.maxUrl}" required="true">
+                            <f:convertNumber integerOnly="true" type="number"/>
+                            <f:validateLongRange minimum="-1" />
+                        </h:inputText>
+                        <h:message for="maxUrl" errorStyle="color: red"/>
+
+                        <h:panelGroup />
+
+                        <h:commandButton action="#{configurationController.save}" value="Save" />
+
+                    </h:panelGrid>
+                </h:form>
+            </f:view>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

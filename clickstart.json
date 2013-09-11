@@ -1,0 +1,32 @@
+{
+    "id": "glassfish4-clickstart",
+    "name": "Glassfish4 App",
+    "source": "github",
+    "description" : "Basic Java EE 7 app deployed on Glassfish 4 Web Profile via Jenkins with maven",
+    "doc-url" : "https://github.com/CloudBees-community/glassfish4-clickstart/blob/master/README.md",
+    "icon" : "https://d3ko533tu1ozfq.cloudfront.net/clickstart/glassfish_icon.png",
+    "disabled" : false,
+    "supported-by" : "community",
+    "app-package" : "https://community.ci.cloudbees.com/job/glassfish4-clickstart/lastSuccessfulBuild/artifact/target/glassfish4-clickstart-1.0.0-SNAPSHOT.war",
+    "order" : 100,
+   
+    "runtime": {
+        "type": "glassfish4",
+        "app-parameters" : {
+            "runtime.glassfish4.auth-realm.database": "mydb"
+        }
+    },
+    "databases": [
+        {
+            "type": "mysql",
+            "alias": "mydb"
+        }
+    ],
+    "build-with-jenkins": {
+        "template": {
+            "type": "maven",
+            "options": {
+            }
+        }
+    }
+}
