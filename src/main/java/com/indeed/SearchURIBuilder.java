@@ -23,7 +23,7 @@ public class SearchURIBuilder {
     private final Format format = Format.JSON;
     private final Sort sort = Sort.RELEVANCE;
     private final Integer radius = 25; // distance from search location
-    private final SiteType siteType = SiteType.ALL;
+    private final SiteType siteType = SiteType.DIRECT_EMPLOYER;
     private final JobType jobType = JobType.ALL;
     private final Integer highlight = 0; // Setting this value to 1 will bold terms in the snippet that are also present in q
     private final Integer filter = 1; // filter duplicate results

@@ -1,21 +1,54 @@
 package com.indeed.entity;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "search_result")
 public class SearchResult {
 
+    @Id
+    @GeneratedValue
     private Long id;
+
+    @Column(name = "job_title", nullable = false)
     private String jobTitle;
+
+    @Column(name = "company", nullable = false)
     private String company;
+
+    @Column(name = "city")
     private String city;
+
+    @Column(name = "country")
     private String country;
+
+    @Column(name = "source")
     private String source;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date")
     private Date date;
+
+    @Column(name = "url")
     private String url;
+
+    @Column(name ="latitude")
     private Double latitude;
+
+    @Column(name = "longitude")
     private Double longtitude;
+
+    @Column(name = "job_key")
     private String jobKey;
+
+    @Column(name = "sponsored")
     private Boolean sponsorded;
+
+    @Column(name = "expired")
     private Boolean expired;
 
     public Long getId() {
@@ -120,5 +153,23 @@ public class SearchResult {
 
     public void setExpired(Boolean expired) {
         this.expired = expired;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(id)
+                .append(company)
+                .append(jobKey)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        SearchResult searchResult = (SearchResult) obj;
+
+        return new EqualsBuilder()
+                .append(searchResult.jobKey, jobKey)
+                .isEquals();
     }
 }

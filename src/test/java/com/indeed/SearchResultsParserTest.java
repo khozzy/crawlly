@@ -16,7 +16,8 @@ public class SearchResultsParserTest {
 
     @Before
     public void init() throws ParseException {
-        searchResultsParser = new SearchResultsParser(getClass().getResourceAsStream("/com/indeed/json_results_output.txt"));
+        searchResultsParser = new SearchResultsParser();
+        searchResultsParser.setJsonParser(getClass().getResourceAsStream("/com/indeed/json_results_output.txt"));
         results = searchResultsParser.parse();
     }
 

@@ -18,11 +18,11 @@ public class SearchResultsParser {
     private JsonParser jsonParser;
     private SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.ROOT);
 
-    public SearchResultsParser(InputStream jsonInputStream) {
+    public void setJsonParser(InputStream jsonInputStream) {
         jsonParser = Json.createParser(jsonInputStream);
     }
 
-    public SearchResultsParser(String jsonString) {
+    public void setJsonParser(String jsonString) {
         jsonParser = Json.createParser(new StringReader(jsonString.trim()));
     }
 
