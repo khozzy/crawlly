@@ -4,9 +4,6 @@ import com.indeed.control.SearchResultsStore;
 import com.indeed.entity.ParsingSearchResults;
 import com.indeed.entity.SearchResult;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.IOException;
