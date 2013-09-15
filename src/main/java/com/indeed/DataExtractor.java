@@ -3,7 +3,6 @@ package com.indeed;
 import com.google.i18n.phonenumbers.PhoneNumberMatch;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import org.apache.commons.io.IOUtils;
-import org.jsoup.Jsoup;
 
 import javax.ejb.Stateless;
 import java.io.IOException;
@@ -66,4 +65,6 @@ public class DataExtractor {
 
         return phones;
     }
+
+
 }

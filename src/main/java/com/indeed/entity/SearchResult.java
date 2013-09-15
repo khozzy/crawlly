@@ -4,7 +4,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "search_result")
@@ -12,6 +14,7 @@ public class SearchResult {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "job_title", nullable = false)
@@ -50,6 +53,15 @@ public class SearchResult {
 
     @Column(name = "expired")
     private Boolean expired;
+
+    @Column(name = "direct_url")
+    private String directUrl;
+
+    @OneToMany(mappedBy = "searchResult", cascade = CascadeType.PERSIST)
+    private List<SearchResultPhone> phones = new ArrayList<>();
+
+    @OneToMany(mappedBy = "searchResult", cascade = CascadeType.PERSIST)
+    private List<SearchResultEmail> emails = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -115,6 +127,14 @@ public class SearchResult {
         this.url = url;
     }
 
+    public String getDirectUrl() {
+        return directUrl;
+    }
+
+    public void setDirectUrl(String directUrl) {
+        this.directUrl = directUrl;
+    }
+
     public Double getLatitude() {
         return latitude;
     }
@@ -153,6 +173,22 @@ public class SearchResult {
 
     public void setExpired(Boolean expired) {
         this.expired = expired;
+    }
+
+    public List<SearchResultPhone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<SearchResultPhone> phones) {
+        this.phones = phones;
+    }
+
+    public List<SearchResultEmail> getEmails() {
+        return emails;
+    }
+
+    public void setEmails(List<SearchResultEmail> emails) {
+        this.emails = emails;
     }
 
     @Override

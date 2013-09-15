@@ -26,6 +26,9 @@ public class SearchResultsStore {
     }
 
     public List<SearchResult> getAll() {
-
+        return (List<SearchResult>) em
+                .createQuery("SELECT sr FROM SearchResult  sr")
+                .setMaxResults(50)
+                .getResultList();
     }
 }
