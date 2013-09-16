@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 @Entity
 @Table(name = "search_result")
-public class SearchResult {
+public class SearchResult implements Comparable<SearchResult>{
 
     @Inject
     @Transient
@@ -248,7 +248,6 @@ public class SearchResult {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(id)
                 .append(company)
                 .append(jobKey)
                 .toHashCode();
@@ -261,5 +260,10 @@ public class SearchResult {
         return new EqualsBuilder()
                 .append(searchResult.jobKey, jobKey)
                 .isEquals();
+    }
+
+    @Override
+    public int compareTo(SearchResult searchResult) {
+        return this.getDate().compareTo(searchResult.getDate());
     }
 }
