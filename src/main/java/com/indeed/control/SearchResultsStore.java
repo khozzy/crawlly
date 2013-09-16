@@ -25,9 +25,16 @@ public class SearchResultsStore {
         this.em.remove(searchResult);
     }
 
+    public SearchResult getByJobKey(String jobKey) {
+        return (SearchResult) em
+                .createQuery("SELECT sr FROM SearchResult sr WHERE sr.jobKey = :jobKey")
+                .setParameter("jobKey", jobKey)
+                .getSingleResult();
+    }
+
     public List<SearchResult> getAll() {
         return (List<SearchResult>) em
-                .createQuery("SELECT sr FROM SearchResult  sr")
+                .createQuery("SELECT sr FROM SearchResult sr ORDER BY sr.date DESC")
                 .setMaxResults(50)
                 .getResultList();
     }

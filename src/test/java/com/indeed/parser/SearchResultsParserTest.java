@@ -1,8 +1,9 @@
-package com.indeed;
+package com.indeed.parser;
 
 
 import com.indeed.entity.ParsingSearchResults;
 import com.indeed.entity.SearchResult;
+import com.indeed.parser.SearchResultsParser;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;

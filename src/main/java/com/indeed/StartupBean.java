@@ -17,7 +17,7 @@ import java.util.List;
 public class StartupBean {
 
     @Inject
-    SearchResults searchResults;
+    Indeed indeed;
 
     @Inject
     SearchResultsStore resultsStore;
@@ -28,7 +28,7 @@ public class StartupBean {
 
         List<SearchResult> resultsList = null;
         try {
-            resultsList = searchResults.getAllResults("Java", "Ireland", 25);
+            resultsList = indeed.updateJobs("Java", "Ireland", 25);
         } catch (URISyntaxException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (IOException e) {

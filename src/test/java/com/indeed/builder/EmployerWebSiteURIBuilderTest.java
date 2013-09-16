@@ -1,5 +1,6 @@
-package com.indeed;
+package com.indeed.builder;
 
+import com.indeed.builder.EmployerWebSiteURIBuilder;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;

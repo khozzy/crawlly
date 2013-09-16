@@ -1,4 +1,4 @@
-package com.indeed;
+package com.indeed.control;
 
 import junit.framework.Assert;
 import org.junit.Before;
@@ -23,10 +23,6 @@ public class DataExtractorTest {
         Set<String> emails = dataExtractor.getEmails();
         Set<String> phones = dataExtractor.getPhoneNumbers();
 
-        for (String phone : phones) {
-            System.out.println("phone = " + phone);
-        }
-
         Assert.assertNotNull(phones);
         Assert.assertNotNull(emails);
 
@@ -35,8 +31,6 @@ public class DataExtractorTest {
 
         Assert.assertEquals(true, phones.contains("+353 1 869 0219"));
         Assert.assertEquals(true, emails.contains("Stephanie.Gavin@italliancegroup.com"));
-
-
     }
 
     @Test
@@ -75,22 +69,4 @@ public class DataExtractorTest {
         Assert.assertEquals(true, phones.contains("+44 (0)203 510 2115"));
         Assert.assertEquals(true, emails.contains("jobs@groupon.co.uk"));
     }
-
-//    @Test
-//    public void testFourthEmployerPage() throws IOException {
-//        dataExtractor.setSource(getClass().getResourceAsStream("/com/indeed/employerSite/employer_site4.html"));
-//        Set<String> emails = dataExtractor.getEmails();
-//
-//        for (String email : emails) {
-//            System.out.println(email);
-//        }
-//
-//        Set<String> phones = dataExtractor.getPhoneNumbers();
-//        // tu ma byc jeden telefon
-//        for (String phone : phones) {
-//            System.out.println("phone = " + phone);
-//        }
-//
-//        Assert.assertTrue(true);
-//    }
 }

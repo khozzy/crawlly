@@ -1,4 +1,4 @@
-package com.indeed;
+package com.indeed.builder;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIUtils;

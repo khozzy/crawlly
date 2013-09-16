@@ -1,4 +1,4 @@
-package com.indeed;
+package com.indeed.parser;
 
 import com.indeed.entity.ParsingSearchResults;
 import com.indeed.entity.SearchResult;

@@ -1,4 +1,4 @@
-package com.indeed;
+package com.indeed.builder;
 
 import com.indeed.enums.*;
 import org.apache.http.NameValuePair;
