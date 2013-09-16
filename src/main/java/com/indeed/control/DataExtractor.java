@@ -2,20 +2,33 @@ package com.indeed.control;
 
 import com.google.i18n.phonenumbers.PhoneNumberMatch;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.indeed.builder.EmployerWebSiteURIBuilder;
+import com.indeed.entity.SearchResult;
+import com.indeed.entity.SearchResultEmail;
+import com.indeed.entity.SearchResultPhone;
 import org.apache.commons.io.IOUtils;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.Transient;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Stateless
 public class DataExtractor {
+
+    @Inject
+    private EmployerWebSiteURIBuilder employerWebSiteURIBuilder;
 
     private final static Pattern emailPattern = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+");
 //    private final static Pattern phoneNumberPattern = Pattern.compile("((\\+)?[1-9]{1,4})?([-\\s\\./])?((\\(\\d{1,4}\\))|\\d{1,4})(([-\\s\\./])?[0-9]{1,6}){2,6}(\\s?(ext|x)\\s?[0-9]{1,6})?");
@@ -64,6 +77,45 @@ public class DataExtractor {
 //        }
 
         return phones;
+    }
+
+    public SearchResult appendContactData(SearchResult result) {
+        URI jobDetailsSiteURI = null;
+        SearchResultEmail resultEmail = new SearchResultEmail();
+        SearchResultPhone resultPhone = new SearchResultPhone();
+
+        try {
+            jobDetailsSiteURI = employerWebSiteURIBuilder.getEmployerURI(result.getJobKey());
+            setSource(jobDetailsSiteURI.toURL().openStream());
+        } catch (URISyntaxException e) {
+            Logger.getLogger(SearchResult.class.getName()).log(Level.WARNING, "Cannot create URI for job_key: " + result.getJobKey(), e);
+        } catch (IOException e) {
+            Logger.getLogger(SearchResult.class.getName()).log(Level.WARNING, "Cannot connect to: " + jobDetailsSiteURI.toString(), e);
+        }
+
+        System.out.println("Site: " + jobDetailsSiteURI.toString());
+
+        for (String email : getEmails()) {
+            System.out.println("email = " + email);
+
+            resultEmail.setSearchResult(result);
+            resultEmail.setEmail(email);
+
+            result.getEmails().add(resultEmail);
+        }
+
+        for (String phone : getPhoneNumbers()) {
+            System.out.println("phone = " + phone);
+
+            resultPhone.setSearchResult(result);
+            resultPhone.setPhone(phone);
+
+            result.getPhones().add(resultPhone);
+        }
+
+        result.setDirectUrl(jobDetailsSiteURI.toString());
+
+        return result;
     }
 
 

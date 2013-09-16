@@ -1,6 +1,7 @@
 package com.indeed;
 
 import com.indeed.builder.SearchURIBuilder;
+import com.indeed.control.DataExtractor;
 import com.indeed.control.SearchResultsStore;
 import com.indeed.entity.ParsingSearchResults;
 import com.indeed.entity.SearchResult;
@@ -27,6 +28,9 @@ public class Indeed {
     @Inject
     private SearchResultsParser parser;
 
+    @Inject
+    private DataExtractor dataExtractor;
+
     public List<SearchResult> getAllParsedJobs() {
         return searchResultsStore.getAll();
     }
@@ -49,7 +53,7 @@ public class Indeed {
             for (SearchResult result : results.getSearchResults()) {
 
                 if (!jobExists(result)) {
-                    result.appendContactData();
+                    result = dataExtractor.appendContactData(result);
                     newJobs.add(result);
                 }
 

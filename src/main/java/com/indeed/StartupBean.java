@@ -12,8 +12,8 @@ import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.List;
 
-@Singleton
 @Startup
+@Singleton
 public class StartupBean {
 
     @Inject

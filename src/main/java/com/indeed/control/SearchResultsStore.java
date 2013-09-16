@@ -4,6 +4,7 @@ import com.indeed.entity.SearchResult;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -26,10 +27,14 @@ public class SearchResultsStore {
     }
 
     public SearchResult getByJobKey(String jobKey) {
-        return (SearchResult) em
-                .createQuery("SELECT sr FROM SearchResult sr WHERE sr.jobKey = :jobKey")
-                .setParameter("jobKey", jobKey)
-                .getSingleResult();
+        try {
+            return (SearchResult) em
+                    .createQuery("SELECT sr FROM SearchResult sr WHERE sr.jobKey = :jobKey")
+                    .setParameter("jobKey", jobKey)
+                    .getSingleResult();  }
+        catch (NoResultException e) {
+            return null;
+        }
     }
 
     public List<SearchResult> getAll() {

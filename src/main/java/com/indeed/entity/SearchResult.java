@@ -1,11 +1,8 @@
 package com.indeed.entity;
 
-import com.indeed.builder.EmployerWebSiteURIBuilder;
-import com.indeed.control.DataExtractor;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import javax.inject.Inject;
 import javax.persistence.*;
 import java.io.IOException;
 import java.net.URI;
@@ -19,14 +16,6 @@ import java.util.logging.Logger;
 @Entity
 @Table(name = "search_result")
 public class SearchResult implements Comparable<SearchResult>{
-
-    @Inject
-    @Transient
-    private DataExtractor dataExtractor;
-
-    @Inject
-    @Transient
-    private EmployerWebSiteURIBuilder employerWebSiteURIBuilder;
 
     @Id
     @GeneratedValue
@@ -205,44 +194,6 @@ public class SearchResult implements Comparable<SearchResult>{
 
     public void setEmails(List<SearchResultEmail> emails) {
         this.emails = emails;
-    }
-
-
-    public void appendContactData() {
-        URI jobDetailsSiteURI = null;
-        SearchResultEmail resultEmail = new SearchResultEmail();
-        SearchResultPhone resultPhone = new SearchResultPhone();
-
-        try {
-            jobDetailsSiteURI = employerWebSiteURIBuilder.getEmployerURI(this.getJobKey());
-            dataExtractor.setSource(jobDetailsSiteURI.toURL().openStream());
-        } catch (URISyntaxException e) {
-            Logger.getLogger(SearchResult.class.getName()).log(Level.WARNING, "Cannot create URI for job_key: " + this.getJobKey(), e);
-        } catch (IOException e) {
-            Logger.getLogger(SearchResult.class.getName()).log(Level.WARNING, "Cannot connect to: " + jobDetailsSiteURI.toString(), e);
-        }
-
-        System.out.println("Site: " + jobDetailsSiteURI.toString());
-
-        for (String email :dataExtractor.getEmails()) {
-            System.out.println("email = " + email);
-
-            resultEmail.setSearchResult(this);
-            resultEmail.setEmail(email);
-
-            this.getEmails().add(resultEmail);
-        }
-
-        for (String phone :dataExtractor.getPhoneNumbers()) {
-            System.out.println("phone = " + phone);
-
-            resultPhone.setSearchResult(this);
-            resultPhone.setPhone(phone);
-
-            this.getPhones().add(resultPhone);
-        }
-
-        this.setDirectUrl(jobDetailsSiteURI.toString());
     }
 
     @Override
