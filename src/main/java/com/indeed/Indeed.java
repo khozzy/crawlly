@@ -27,8 +27,12 @@ public class Indeed {
     @Inject
     private SearchResultsParser parser;
 
+    public List<SearchResult> getAllParsedJobs() {
+        return searchResultsStore.getAll();
+    }
+
     public List<SearchResult> updateJobs(String query, String location, Integer limit) throws URISyntaxException, IOException, ParseException {
-        List<SearchResult> allResults = new ArrayList<>();
+        List<SearchResult> newJobs = new ArrayList<>();
 
         Integer position = 0;
         Integer total;
@@ -46,7 +50,7 @@ public class Indeed {
 
                 if (!jobExists(result)) {
                     result.appendContactData();
-                    allResults.add(result);
+                    newJobs.add(result);
                 }
 
             }
@@ -54,7 +58,7 @@ public class Indeed {
             position += limit;
         } while (position < total);
 
-        return allResults;
+        return newJobs;
     }
 
 
