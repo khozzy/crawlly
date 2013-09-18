@@ -1,8 +1,10 @@
 package com.indeed.entity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name = "search_result_phone")
 public class SearchResultPhone {
 
@@ -46,5 +48,10 @@ public class SearchResultPhone {
 
     public void setSearchResult(SearchResult searchResult) {
         this.searchResult = searchResult;
+    }
+
+    @Override
+    public String toString() {
+        return phone;
     }
 }

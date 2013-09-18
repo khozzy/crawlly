@@ -1,18 +1,16 @@
 package com.indeed;
 
-import com.indeed.control.SearchResultsStore;
+import com.indeed.control.store.SearchResultsStore;
 import com.indeed.entity.SearchResult;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.List;
 
-@Startup
 @Singleton
 public class StartupBean {
 
@@ -38,7 +36,7 @@ public class StartupBean {
         }
 
         for (SearchResult result : resultsList) {
-            resultsStore.save(result);
+            resultsStore.create(result);
         }
 
     }

@@ -4,18 +4,22 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.persistence.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Entity
 @Table(name = "search_result")
+@XmlRootElement
+@NamedQueries({
+        @NamedQuery(name = "SearchResult.findAll", query = "SELECT sr FROM SearchResult sr"),
+        @NamedQuery(name = "SearchResult.countTotal", query = "SELECT COUNT(sr) FROM SearchResult sr")
+})
 public class SearchResult implements Comparable<SearchResult>{
+
+    public final static String ALL = "SearchResult.findAll";
+    public final static String TOTAL = "SearchResult.countTotal";
 
     @Id
     @GeneratedValue
@@ -62,10 +66,10 @@ public class SearchResult implements Comparable<SearchResult>{
     @Column(name = "direct_url")
     private String directUrl;
 
-    @OneToMany(mappedBy = "searchResult", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "searchResult", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<SearchResultPhone> phones = new ArrayList<>();
 
-    @OneToMany(mappedBy = "searchResult", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "searchResult", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<SearchResultEmail> emails = new ArrayList<>();
 
     public Long getId() {

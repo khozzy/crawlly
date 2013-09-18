@@ -2,7 +2,7 @@ package com.indeed;
 
 import com.indeed.builder.SearchURIBuilder;
 import com.indeed.control.DataExtractor;
-import com.indeed.control.SearchResultsStore;
+import com.indeed.control.store.SearchResultsStore;
 import com.indeed.entity.ParsingSearchResults;
 import com.indeed.entity.SearchResult;
 import com.indeed.parser.SearchResultsParser;
@@ -32,7 +32,7 @@ public class Indeed {
     private DataExtractor dataExtractor;
 
     public List<SearchResult> getAllParsedJobs() {
-        return searchResultsStore.getAll();
+        return searchResultsStore.findByNativeQuery(SearchResult.ALL);
     }
 
     public List<SearchResult> updateJobs(String query, String location, Integer limit) throws URISyntaxException, IOException, ParseException {
@@ -67,6 +67,7 @@ public class Indeed {
 
 
     private Boolean jobExists(SearchResult searchResult) {
-        return (searchResultsStore.getByJobKey(searchResult.getJobKey()) != null);
+        return false;
+//        return (searchResultsStore.getByJobKey(searchResult.getJobKey()) != null);
     }
 }
