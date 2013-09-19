@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <body>
 <ui:composition>
 
     <h:panelGroup id="messages" style="min-height: 20px; margin-left: 20px; margin-right: 20px;" rendered="#{not empty facesContext.messages}">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <button type="button" class="close" data-dismiss="alert" />
         <h:messages errorClass="alert alert-danger" infoClass="alert alert-info" fatalClass="alert alert-error" globalOnly="true" />
     </h:panelGroup>
 

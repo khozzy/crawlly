@@ -4,16 +4,19 @@ package com.indeed.presentation.other;
 import com.indeed.control.store.SearchResultsStore;
 import com.indeed.entity.SearchResult;
 import com.indeed.presentation.model.LazySearchResultDataModel;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
 import java.io.Serializable;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class SearchResultTableBean implements Serializable {
 
     @Inject
@@ -28,6 +31,14 @@ public class SearchResultTableBean implements Serializable {
     @PostConstruct
     public void init() {
         lazyModel = new LazySearchResultDataModel(resultsStore);
+    }
+
+    public void orderSelect(SelectEvent event) throws IOException {
+        FacesContext
+                .getCurrentInstance()
+                .getExternalContext()
+                .redirect("searchResultDetails.xhtml?id=" + selectedSearchResult.getId());
+
     }
 
     public LazyDataModel<SearchResult> getLazyModel() {

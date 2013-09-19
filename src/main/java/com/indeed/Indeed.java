@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLConnection;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,9 @@ public class Indeed {
 
         do {
             uri = searchURIBuilder.getURIForPagination(query,location, position, limit);
-            parser.setJsonParser(uri.toURL().openStream());
+            URLConnection urlConnection =  uri.toURL().openConnection();
+            urlConnection.setConnectTimeout(5000);
+            parser.setJsonParser(urlConnection.getInputStream());
             results = parser.parse();
 
             total = results.getTotalResults();
