@@ -59,7 +59,6 @@ public class Indeed {
                     result = dataExtractor.appendContactData(result);
                     newJobs.add(result);
                 }
-
             }
 
             position += limit;

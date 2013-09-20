@@ -70,50 +70,18 @@
 
                 </p:dataTable>
 
-                <h:panelGrid columns="2" id="exporter">
-                    <p:panel header="Export All Data">
-                        <h:commandLink>
-                            <p:graphicImage library="images" name="excel.png" />
-                            <p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" />
-                        </h:commandLink>
+                <h:panelGrid columns="2" id="exporter" style="float: right;">
 
-                        <h:commandLink>
-                            <p:graphicImage library="images" name="pdf.gif" />
-                            <p:dataExporter type="pdf" target="searchResultTable" fileName="searchResults"/>
-                        </h:commandLink>
+                    <h:commandLink value="Export all data">
+                        <p:graphicImage library="images" name="excel.png" />
+                        <p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" />
+                    </h:commandLink>
 
-                        <h:commandLink>
-                            <p:graphicImage library="images" name="csv.png" />
-                            <p:dataExporter type="csv" target="searchResultTable" fileName="searchResults" />
-                        </h:commandLink>
+                    <h:commandLink value="Export page data">
+                        <p:graphicImage library="images" name="excel.png" />
+                        <p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" pageOnly="true"/>
+                    </h:commandLink>
 
-                        <h:commandLink>
-                            <p:graphicImage library="images" name="xml.jpg" />
-                            <p:dataExporter type="xml" target="searchResultTable" fileName="searchResults" />
-                        </h:commandLink>
-                    </p:panel>
-
-                    <p:panel header="Export Page Data">
-                        <h:commandLink>
-                            <p:graphicImage library="images" name="excel.png" />
-                            <p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" pageOnly="true"/>
-                        </h:commandLink>
-
-                        <h:commandLink>
-                            <p:graphicImage library="images" name="pdf.gif" />
-                            <p:dataExporter type="pdf" target="searchResultTable" fileName="searchResults" pageOnly="true"/>
-                        </h:commandLink>
-
-                        <h:commandLink>
-                            <p:graphicImage library="images" name="csv.png" />
-                            <p:dataExporter type="csv" target="searchResultTable" fileName="searchResults" pageOnly="true"/>
-                        </h:commandLink>
-
-                        <h:commandLink>
-                            <p:graphicImage library="images" name="xml.jpg" />
-                            <p:dataExporter type="xml" target="searchResultTable" fileName="searchResults" pageOnly="true"/>
-                        </h:commandLink>
-                    </p:panel>
                 </h:panelGrid>
             </h:form>
 

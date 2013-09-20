@@ -14,7 +14,8 @@ import java.util.List;
 @XmlRootElement
 @NamedQueries({
         @NamedQuery(name = "SearchResult.findAll", query = "SELECT sr FROM SearchResult sr"),
-        @NamedQuery(name = "SearchResult.countTotal", query = "SELECT COUNT(sr) FROM SearchResult sr")
+        @NamedQuery(name = "SearchResult.countTotal", query = "SELECT COUNT(sr) FROM SearchResult sr"),
+        @NamedQuery(name = "SearchResutl.skipIfExists", query = "SELECT sr FROM SearchResult sr WHERE sr.jobKey = :jobKey")
 })
 public class SearchResult implements Comparable<SearchResult>{
 

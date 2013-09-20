@@ -17,7 +17,26 @@
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
 
-            <h:outputText value="Search results details" />
+            <h:form id="details">
+
+                <h:panelGrid id="grid" columns="1">
+                    <h:panelGroup>
+                        <h:outputLabel id="companyLabel" for="company" value="Company" />
+                        <h:inputText id="company" value="#{searchResultDetailBean.searchResult.company}" size="50"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup>
+                        <h:outputLabel id="jobTitleLabel" for="jobTitle" value="Job title" />
+                        <h:inputText id="jobTitle" value="#{searchResultDetailBean.searchResult.jobTitle}" size="50"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup>
+                        <h:outputLabel id="cityLabel" for="city" value="City" />
+                        <h:inputText id="city" value="#{searchResultDetailBean.searchResult.city}" size="50"/>
+                    </h:panelGroup>
+                </h:panelGrid>
+
+            </h:form>
 
         </ui:define>
     </ui:composition>

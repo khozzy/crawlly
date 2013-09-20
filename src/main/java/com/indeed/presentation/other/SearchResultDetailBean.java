@@ -3,11 +3,13 @@ package com.indeed.presentation.other;
 import com.indeed.entity.SearchResult;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class SearchResultDetailBean implements Serializable {
 
     private SearchResult searchResult;

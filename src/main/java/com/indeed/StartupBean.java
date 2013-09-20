@@ -13,7 +13,6 @@ import java.text.ParseException;
 import java.util.List;
 
 @Singleton
-@Startup
 public class StartupBean {
 
     @Inject
@@ -27,8 +26,9 @@ public class StartupBean {
         System.out.println("start");
 
         List<SearchResult> resultsList = null;
+        // or Project Assurance or Laboratory or BioPharma or Chemical
         try {
-            resultsList = indeed.updateJobs("Chemistry or Biotechnology or Process Engineer or Engineering Validation or Biology or Project Assurance or Laboratory or BioPharma or Chemical", "Ireland", 25);
+            resultsList = indeed.updateJobs("Chemistry or Biotechnology or Process Engineer or Engineering Validation or Biology", "Ireland", 25);
         } catch (URISyntaxException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (IOException e) {

@@ -22,6 +22,9 @@ public class SearchResultTableBean implements Serializable {
     @Inject
     private SearchResultsStore resultsStore;
 
+    @Inject
+    private SearchResultDetailBean resultDetailBean;
+
     private LazyDataModel<SearchResult> lazyModel;
     private SearchResult selectedSearchResult;
 
@@ -34,10 +37,13 @@ public class SearchResultTableBean implements Serializable {
     }
 
     public void orderSelect(SelectEvent event) throws IOException {
+
+        resultDetailBean.setSearchResult(selectedSearchResult);
+
         FacesContext
                 .getCurrentInstance()
                 .getExternalContext()
-                .redirect("searchResultDetails.xhtml?id=" + selectedSearchResult.getId());
+                .redirect("searchResultDetails.xhtml");
 
     }
 
