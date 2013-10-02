@@ -30,7 +30,15 @@
 
         <ui:define name="content">
 
-            <h:outputText value="Search here" />
+            <h:outputText value="Search" />
+
+            <h:form id="searchForm">
+                <h:inputText id="query_input" value="#{searchBean.query}" />
+                <h:inputText id="location_input" value="#{searchBean.location}"/>
+
+                <h:commandButton action="#{searchBean.startSearching}" type="submit" value="Search"/>
+            </h:form>
+
 
         </ui:define>
     </ui:composition>

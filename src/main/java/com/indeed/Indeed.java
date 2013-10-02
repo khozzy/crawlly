@@ -10,12 +10,15 @@ import com.indeed.parser.SearchResultsParser;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLConnection;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Stateless
 public class Indeed {
@@ -36,7 +39,17 @@ public class Indeed {
         return searchResultsStore.findByNativeQuery(SearchResult.ALL);
     }
 
-    public List<SearchResult> updateJobs(String query, String location, Integer limit) throws URISyntaxException, IOException, ParseException {
+    public Integer getTotalSearchResults(String query, String location, Integer limit) throws URISyntaxException, IOException, ParseException {
+        URI uri;
+
+        uri = searchURIBuilder.getURIForPagination(query,location,0,limit);
+        URLConnection urlConnection = uri.toURL().openConnection();
+        parser.setJsonParser(urlConnection.getInputStream());
+        return parser.parse().getTotalResults();
+
+    }
+
+    public List<SearchResult> getNewJobs(String query, String location, Integer limit) throws URISyntaxException, IOException, ParseException {
         List<SearchResult> newJobs = new ArrayList<>();
 
         Integer position = 0;
@@ -69,7 +82,18 @@ public class Indeed {
 
 
     private Boolean jobExists(SearchResult searchResult) {
+        List results;
+        Map<String, String> params = new HashMap<>();
+
+        params.put("jobKey", searchResult.getJobKey());
+
+        results = searchResultsStore.findWithNamedQuery(SearchResult.GET_BY_JOB_KEY,params,1);
+
+        if (results.size() >= 1) {
+            return true;
+        }
+
         return false;
-//        return (searchResultsStore.getByJobKey(searchResult.getJobKey()) != null);
     }
+
 }

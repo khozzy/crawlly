@@ -29,8 +29,8 @@ public abstract class Store<T> {
 
     public T create(T t) {
         this.em.persist(t);
-        this.em.flush();
-        this.em.refresh(t);
+//        this.em.flush();
+//        this.em.refresh(t);
         return t;
     }
 

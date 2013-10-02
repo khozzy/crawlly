@@ -15,15 +15,16 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "SearchResult.findAll", query = "SELECT sr FROM SearchResult sr"),
         @NamedQuery(name = "SearchResult.countTotal", query = "SELECT COUNT(sr) FROM SearchResult sr"),
-        @NamedQuery(name = "SearchResutl.skipIfExists", query = "SELECT sr FROM SearchResult sr WHERE sr.jobKey = :jobKey")
+        @NamedQuery(name = "SearchResutl.getByJobKey", query = "SELECT sr FROM SearchResult sr WHERE sr.jobKey = :jobKey")
 })
 public class SearchResult implements Comparable<SearchResult>{
 
     public final static String ALL = "SearchResult.findAll";
     public final static String TOTAL = "SearchResult.countTotal";
+    public final static String GET_BY_JOB_KEY = "SearchResutl.getByJobKey";
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
 
