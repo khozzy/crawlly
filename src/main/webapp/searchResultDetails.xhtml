@@ -4,7 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
 <h:head>
     <title>Crawler</title>
@@ -19,7 +19,9 @@
 
             <h:form id="details">
 
-                <h:panelGrid id="grid" columns="1">
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
+                <h:panelGrid id="grid" columns="2">
                     <h:panelGroup>
                         <h:outputLabel id="companyLabel" for="company" value="Company" />
                         <h:inputText id="company" value="#{searchResultDetailBean.searchResult.company}" size="50"/>
@@ -34,7 +36,20 @@
                         <h:outputLabel id="cityLabel" for="city" value="City" />
                         <h:inputText id="city" value="#{searchResultDetailBean.searchResult.city}" size="50"/>
                     </h:panelGroup>
+
+                    <h:panelGroup>
+                        <h:outputLabel id="latitudeLabel" for="latitude" value="Latitude" />
+                        <h:inputText id="latitude" value="#{searchResultDetailBean.searchResult.latitude}" size="50"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup>
+                        <h:outputLabel id="longitudeLabel" for="longitude" value="Longitude" />
+                        <h:inputText id="longitude" value="#{searchResultDetailBean.searchResult.longtitude}" size="50"/>
+                    </h:panelGroup>
+
                 </h:panelGrid>
+
+                <h:commandButton action="#{searchResultDetailBean.save}" value="Save" />
 
             </h:form>
 

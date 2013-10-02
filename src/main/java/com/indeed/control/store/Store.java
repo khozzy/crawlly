@@ -9,11 +9,12 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class Store<T> {
+public abstract class Store<T> implements Serializable{
 
     @PersistenceContext
     private EntityManager em;
