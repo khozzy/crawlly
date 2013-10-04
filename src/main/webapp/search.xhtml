@@ -6,13 +6,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-    <title>Crawler</title>
-    <h:outputStylesheet library="css" name="bootstrap.css" />
-    <h:outputScript library="js" name="jquery-2.0.3.js" />
-    <h:outputScript library="js" name="bootstrap.js" />
-</h:head>
-
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
 
@@ -29,14 +22,24 @@
         </ui:define>
 
         <ui:define name="content">
-
+            <h:outputStylesheet library="css" name="search.css" />
             <h:outputText value="Search" />
 
             <h:form id="searchForm">
                 <h:inputText id="query_input" value="#{searchBean.query}" />
                 <h:inputText id="location_input" value="#{searchBean.location}"/>
 
-                <h:commandButton action="#{searchBean.startSearching}" type="submit" value="Search"/>
+                <p:commandButton value="Start search" action="#{searchBean.setRunning()}" type="submit" widgetVar="startSearchBtn" onclick="pbAjax.start();startSearchBtn.disable();"/>
+
+                <h:panelGroup>
+                    <p:progressBar widgetVar="pbAjax" ajax="true" value="#{searchBean.progress}" labelTemplate="{value}%" styleClass="animated">
+                        <p:ajax event="complete" listener="#{searchBean.onComplete}" oncomplete="startSearchBtn.enable()"/>
+                    </p:progressBar>
+                </h:panelGroup>
+
+
+                <p:dialog></p:dialog>
+
             </h:form>
 
 
