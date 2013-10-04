@@ -30,4 +30,11 @@ public class SearchProgress {
     public void setTotal(Integer total) {
         this.total = total;
     }
+
+    public Float getProgress() {
+        float currentFloat = (float) this.current;
+        float totalFloat = (float) this.total;
+
+        return (currentFloat / totalFloat * 100);
+    }
 }

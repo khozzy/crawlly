@@ -68,10 +68,10 @@ public class SearchResult implements Comparable<SearchResult>{
     @Column(name = "direct_url")
     private String directUrl;
 
-    @OneToMany(mappedBy = "searchResult", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "searchResult", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<SearchResultPhone> phones = new ArrayList<>();
 
-    @OneToMany(mappedBy = "searchResult", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "searchResult", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<SearchResultEmail> emails = new ArrayList<>();
 
     public Long getId() {

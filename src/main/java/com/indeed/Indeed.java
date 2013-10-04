@@ -9,12 +9,10 @@ import com.indeed.entity.SearchResult;
 import com.indeed.parser.SearchResultsParser;
 import com.indeed.presentation.other.SearchProgress;
 
-import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLConnection;
@@ -55,13 +53,15 @@ public class Indeed {
     public Integer getTotalSearchResults(String query, String location, Integer limit) throws URISyntaxException, IOException, ParseException {
         URI uri;
 
-        uri = searchURIBuilder.getURIForPagination(query,location,0,limit);
+        uri = searchURIBuilder.getURIForFromage(query, location, 0, limit, 15);
         URLConnection urlConnection = uri.toURL().openConnection();
         parser.setJsonParser(urlConnection.getInputStream());
         return parser.parse().getTotalResults();
     }
 
     public List<SearchResult> getNewJobs(String query, String location, Integer limit) throws URISyntaxException, IOException, ParseException {
+        System.out.println("Get new jobs started....");
+
         List<SearchResult> newJobs = new ArrayList<>();
 
         Integer position = 0;
@@ -70,7 +70,9 @@ public class Indeed {
         ParsingSearchResults results;
 
         do {
-            uri = searchURIBuilder.getURIForPagination(query,location, position, limit);
+            uri = searchURIBuilder.getURIForFromage(query, location, position, limit, 15);
+            System.out.println("uri: " + uri.toString());
+
             URLConnection urlConnection =  uri.toURL().openConnection();
             urlConnection.setConnectTimeout(5000);
             parser.setJsonParser(urlConnection.getInputStream());
@@ -78,25 +80,22 @@ public class Indeed {
 
             total = results.getTotalResults();
 
+            if (total == 0) return null;
+
             for (SearchResult result : results.getSearchResults()) {
 
                 if (!jobExists(result)) {
                     result = dataExtractor.appendContactData(result);
                     newJobs.add(result);
                 }
+
                 position++;
             }
 
-//            position += limit;
-//            System.out.println("uri = " + uri.toString());
             searchProgress.setCurrent(position);
             searchProgressEvent.fire(searchProgress);
 
         } while (position < total);
-
-
-        searchProgress.setCurrent(total);
-        searchProgressEvent.fire(searchProgress);
 
         return newJobs;
     }
@@ -109,10 +108,13 @@ public class Indeed {
             totalSearchResults = getTotalSearchResults(query, location, limit);
 
             searchProgress.setTotal(totalSearchResults);
-            searchProgressEvent.fire(searchProgress);
+            List <SearchResult> searchResults = getNewJobs(query, location, limit);
 
-            for (SearchResult result : getNewJobs(query, location, limit)) {
-                searchResultsStore.create(result);
+            System.out.println("b4 saving");
+            for (SearchResult result : searchResults) {
+                if (!jobExists(result)) {
+                    searchResultsStore.create(result);
+                }
             }
 
         } catch (URISyntaxException | IOException | ParseException e) {
@@ -129,6 +131,7 @@ public class Indeed {
         results = searchResultsStore.findWithNamedQuery(SearchResult.GET_BY_JOB_KEY,params,1);
 
         if (results.size() >= 1) {
+            System.out.println("Job with key " + searchResult.getJobKey() + " already exists!");
             return true;
         }
 

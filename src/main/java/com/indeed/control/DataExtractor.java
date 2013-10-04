@@ -16,9 +16,7 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -81,8 +79,9 @@ public class DataExtractor {
 
     public SearchResult appendContactData(SearchResult result) {
         URI jobDetailsSiteURI = null;
-        SearchResultEmail resultEmail = new SearchResultEmail();
-        SearchResultPhone resultPhone = new SearchResultPhone();
+        SearchResultEmail resultEmail;
+        SearchResultPhone resultPhone;
+
 
         try {
             jobDetailsSiteURI = employerWebSiteURIBuilder.getEmployerURI(result.getJobKey());
@@ -96,7 +95,7 @@ public class DataExtractor {
         System.out.println("Site: " + jobDetailsSiteURI.toString());
 
         for (String email : getEmails()) {
-            System.out.println("email = " + email);
+            resultEmail = new SearchResultEmail();
 
             resultEmail.setSearchResult(result);
             resultEmail.setEmail(email);
@@ -105,7 +104,7 @@ public class DataExtractor {
         }
 
         for (String phone : getPhoneNumbers()) {
-            System.out.println("phone = " + phone);
+            resultPhone = new SearchResultPhone();
 
             resultPhone.setSearchResult(result);
             resultPhone.setPhone(phone);

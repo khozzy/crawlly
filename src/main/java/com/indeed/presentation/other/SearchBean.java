@@ -19,7 +19,7 @@ public class SearchBean {
     @Inject
     private Indeed indeed;
 
-    private void startSearching() {
+    public void startSearching() {
         indeed.startSearching(query,location);
     }
 
@@ -45,8 +45,6 @@ public class SearchBean {
 
 
     public Float getProgress() {
-        System.out.println("get progress....");
-        System.out.println("isRunning = " + isRunning);
         if (progress == null) {
             progress = 0f;
         }
@@ -60,7 +58,6 @@ public class SearchBean {
             isRunning = false;
         }
 
-
         return progress;
     }
 
@@ -69,12 +66,8 @@ public class SearchBean {
     }
 
     private void updateProgress(@Observes @Progress SearchProgress searchProgress) {
-        System.out.println("Event received");
-        System.out.println("searchProgress.getCurrent() = " + searchProgress.getCurrent());
-        System.out.println("searchProgress.getTotal() = " + searchProgress.getTotal());
-        System.out.println("progress: " + (float) searchProgress.getCurrent() / searchProgress.getTotal() * 100);
-
-        setProgress((float) ((searchProgress.getCurrent() / searchProgress.getTotal()) * 100));
+        System.out.println("PROGRESS: " + searchProgress.getCurrent() + "/" + searchProgress.getTotal() + " (" + searchProgress.getProgress() + "%)");
+        setProgress(searchProgress.getProgress());
     }
 
     public void onComplete() {

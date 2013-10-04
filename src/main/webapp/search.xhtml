@@ -29,6 +29,8 @@
                 <h:inputText id="query_input" value="#{searchBean.query}" />
                 <h:inputText id="location_input" value="#{searchBean.location}"/>
 
+                <h:commandButton value="Start non pb" action="#{searchBean.startSearching()}" />
+
                 <p:commandButton value="Start search" action="#{searchBean.setRunning()}" type="submit" widgetVar="startSearchBtn" onclick="pbAjax.start();startSearchBtn.disable();"/>
 
                 <h:panelGroup>
