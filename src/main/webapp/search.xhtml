@@ -23,24 +23,16 @@
 
         <ui:define name="content">
             <h:outputStylesheet library="css" name="search.css" />
-            <h:outputText value="Search" />
+
+            <h3>
+                <h:outputText value="Search" />
+            </h3>
 
             <h:form id="searchForm">
-                <h:inputText id="query_input" value="#{searchBean.query}" />
-                <h:inputText id="location_input" value="#{searchBean.location}"/>
-
-                <h:commandButton value="Start non pb" action="#{searchBean.startSearching()}" />
-
-                <p:commandButton value="Start search" action="#{searchBean.setRunning()}" type="submit" widgetVar="startSearchBtn" onclick="pbAjax.start();startSearchBtn.disable();"/>
-
-                <h:panelGroup>
-                    <p:progressBar widgetVar="pbAjax" ajax="true" value="#{searchBean.progress}" labelTemplate="{value}%" styleClass="animated">
-                        <p:ajax event="complete" listener="#{searchBean.onComplete}" oncomplete="startSearchBtn.enable()"/>
-                    </p:progressBar>
-                </h:panelGroup>
-
-
-                <p:dialog></p:dialog>
+                <h:inputText id="query_input" value="#{searchBean.query}" styleClass="input-xlarge" />
+                <h:inputText id="location_input" value="#{searchBean.location}" styleClass="input-mini" />
+                <br />
+                <h:commandButton value="Start searching" action="#{searchBean.startSearching()}" styleClass="btn btn-info"/>
 
             </h:form>
 

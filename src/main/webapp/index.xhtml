@@ -6,17 +6,23 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-    <title>Crawler</title>
-    <h:outputStylesheet library="css" name="bootstrap.css" />
-    <h:outputScript library="js" name="jquery-2.0.3.js" />
-    <h:outputScript library="js" name="bootstrap.js" />
-</h:head>
-
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
             <h:form id="form">
+                <small>
+                    <h:panelGrid columns="2" id="exporter" styleClass="pull-right">
+                        <h:commandLink value="Export all">
+                            <p:graphicImage library="images" name="excel.png" width="25" height="25"/>
+                            <p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" />
+                        </h:commandLink>
+
+                        <h:commandLink value="Export page">
+                            <p:graphicImage library="images" name="excel.png" width="25" height="25"/>
+                            <p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" pageOnly="true"/>
+                        </h:commandLink>
+                    </h:panelGrid>
+                </small>
 
                 <p:dataTable var="searchResult"
                              value="#{searchResultTableBean.lazyModel}"
@@ -26,6 +32,7 @@
                              rowsPerPageTemplate="15,30,50"
                              selectionMode="single"
                              selection="#{searchResultTableBean.selectedSearchResult}"
+                             tableStyleClass="table"
                              id="searchResultTable"
                              lazy="true"
                              style="font-size: 13px"
@@ -34,9 +41,9 @@
 
                     <p:ajax event="rowSelect" listener="#{searchResultTableBean.orderSelect}" />
 
-                    <p:column headerText="ID">
-                        <h:outputText value="#{searchResult.id}" />
-                    </p:column>
+                    <!--<p:column headerText="ID">-->
+                        <!--<h:outputText value="#{searchResult.id}" />-->
+                    <!--</p:column>-->
 
                     <p:column headerText="Company" sortBy="#{searchResult.company}">
                         <h:outputText value="#{searchResult.company}" />
@@ -61,7 +68,7 @@
                     </p:column>
 
                     <p:column headerText="Phones">
-                        <p:dataList value="#{searchResult.phones}" var="phone" rendered="#{not empty searchResult.phones}">
+                        <p:dataList value="#{searchResult.phones}" var="phone" rendered="#{not empty searchResult.phones}" styleClass="list-unstyled">
                             <h:outputLink value="tel:#{phone}">
                                 <h:outputText value="#{phone}" />
                             </h:outputLink>
@@ -69,20 +76,6 @@
                     </p:column>
 
                 </p:dataTable>
-
-                <h:panelGrid columns="2" id="exporter" style="float: right;">
-
-                    <h:commandLink value="Export all data">
-                        <p:graphicImage library="images" name="excel.png" />
-                        <p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" />
-                    </h:commandLink>
-
-                    <h:commandLink value="Export page data">
-                        <p:graphicImage library="images" name="excel.png" />
-                        <p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" pageOnly="true"/>
-                    </h:commandLink>
-
-                </h:panelGrid>
             </h:form>
 
 

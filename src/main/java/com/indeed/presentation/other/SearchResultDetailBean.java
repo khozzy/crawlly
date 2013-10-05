@@ -27,7 +27,8 @@ public class SearchResultDetailBean implements Serializable {
         this.searchResult = searchResult;
     }
 
-    public void save() {
+    public String save() {
         resultsStore.update(searchResult);
+        return "index";
     }
 }
