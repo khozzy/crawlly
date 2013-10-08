@@ -14,12 +14,12 @@
                     <h:panelGrid columns="2" id="exporter" styleClass="pull-right">
                         <h:commandLink value="Export all">
                             <p:graphicImage library="images" name="excel.png" width="25" height="25"/>
-                            <p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" />
+                            <p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" preProcessor="#{searchResultTableBean.preProcessXLS}"/>
                         </h:commandLink>
 
                         <h:commandLink value="Export page">
                             <p:graphicImage library="images" name="excel.png" width="25" height="25"/>
-                            <p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" pageOnly="true"/>
+                            <p:dataExporter type="xls" target="searchResultTable" fileName="currentPageSearchResults" pageOnly="true"/>
                         </h:commandLink>
                     </h:panelGrid>
                 </small>
