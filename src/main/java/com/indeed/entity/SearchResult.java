@@ -5,9 +5,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "search_result")
@@ -69,10 +67,10 @@ public class SearchResult implements Comparable<SearchResult>{
     private String directUrl;
 
     @OneToMany(mappedBy = "searchResult", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<SearchResultPhone> phones = new ArrayList<>();
+    private Set<SearchResultPhone> phones = new HashSet<>();
 
     @OneToMany(mappedBy = "searchResult", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<SearchResultEmail> emails = new ArrayList<>();
+    private Set<SearchResultEmail> emails = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -186,19 +184,19 @@ public class SearchResult implements Comparable<SearchResult>{
         this.expired = expired;
     }
 
-    public List<SearchResultPhone> getPhones() {
+    public Set<SearchResultPhone> getPhones() {
         return phones;
     }
 
-    public void setPhones(List<SearchResultPhone> phones) {
+    public void setPhones(Set<SearchResultPhone> phones) {
         this.phones = phones;
     }
 
-    public List<SearchResultEmail> getEmails() {
+    public Set<SearchResultEmail> getEmails() {
         return emails;
     }
 
-    public void setEmails(List<SearchResultEmail> emails) {
+    public void setEmails(Set<SearchResultEmail> emails) {
         this.emails = emails;
     }
 

@@ -3,82 +3,13 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
-            <h:form id="form">
-                <small>
-                    <h:panelGrid columns="2" id="exporter" styleClass="pull-right">
-                        <h:commandLink value="Export all" action="#{searchResultTableBean.exportPDF(searchResultTableBean, 'searchResults', false)}">
-                            <p:graphicImage library="images" name="excel.png" width="25" height="25"/>
-                            <!--<p:dataExporter type="xls" target="searchResultTable" fileName="searchResults" />-->
-                        </h:commandLink>
 
-                        <h:commandLink value="Export page">
-                            <p:graphicImage library="images" name="excel.png" width="25" height="25"/>
-                            <p:dataExporter type="xls" target="searchResultTable" fileName="currentPageSearchResults" pageOnly="true" />
-                        </h:commandLink>
-                    </h:panelGrid>
-                </small>
-
-                <p:dataTable var="searchResult"
-                             value="#{searchResultTableBean.lazyModel}"
-                             paginator="true"
-                             rows="30"
-                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                             rowsPerPageTemplate="15,30,50"
-                             selectionMode="single"
-                             selection="#{searchResultTableBean.selectedSearchResult}"
-                             tableStyleClass="table"
-                             id="searchResultTable"
-                             lazy="true"
-                             style="font-size: 13px"
-                             sortBy="#{searchResult.date}"
-                             sortOrder="descending"
-                             binding="#{searchResultTableBean}">
-
-                    <p:ajax event="rowSelect" listener="#{searchResultTableBean.orderSelect}" />
-
-                    <!--<p:column headerText="ID">-->
-                        <!--<h:outputText value="#{searchResult.id}" />-->
-                    <!--</p:column>-->
-
-                    <p:column headerText="Company" sortBy="#{searchResult.company}">
-                        <h:outputText value="#{searchResult.company}" />
-                    </p:column>
-
-                    <p:column headerText="City" sortBy="#{searchResult.city}">
-                        <h:outputText value="#{searchResult.city}" />
-                    </p:column>
-
-                    <p:column headerText="Date" sortBy="#{searchResult.date}">
-                        <h:outputText value="#{searchResult.date}">
-                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-                        </h:outputText>
-                    </p:column>
-
-                    <p:column headerText="Emails">
-                        <p:dataList value="#{searchResult.emails}" var="email" rendered="#{not empty searchResult.emails}">
-                            <h:outputLink value="mailto:#{email}">
-                                <h:outputText value="#{email}" />
-                            </h:outputLink>
-                        </p:dataList>
-                    </p:column>
-
-                    <p:column headerText="Phones">
-                        <p:dataList value="#{searchResult.phones}" var="phone" rendered="#{not empty searchResult.phones}" styleClass="list-unstyled">
-                            <h:outputLink value="tel:#{phone}">
-                                <h:outputText value="#{phone}" />
-                            </h:outputLink>
-                        </p:dataList>
-                    </p:column>
-
-                </p:dataTable>
-            </h:form>
-
+            Hello from crawler frontend
 
         </ui:define>
     </ui:composition>

@@ -1,16 +1,13 @@
 package com.indeed;
 
-import com.indeed.annotation.Progress;
 import com.indeed.builder.SearchURIBuilder;
 import com.indeed.control.DataExtractor;
 import com.indeed.control.store.SearchResultsStore;
 import com.indeed.entity.ParsingSearchResults;
 import com.indeed.entity.SearchResult;
 import com.indeed.parser.SearchResultsParser;
-import com.indeed.presentation.other.SearchProgress;
 
 import javax.ejb.Stateless;
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.net.URI;
@@ -38,11 +35,6 @@ public class Indeed {
 
     @Inject
     private DataExtractor dataExtractor;
-
-    private SearchProgress searchProgress;
-
-    @Inject @Progress
-    Event<SearchProgress> searchProgressEvent;
 
     private static final Integer limit = 25;
 
@@ -92,9 +84,6 @@ public class Indeed {
                 position++;
             }
 
-            searchProgress.setCurrent(position);
-            searchProgressEvent.fire(searchProgress);
-
         } while (position < total);
 
         return newJobs;
@@ -102,12 +91,10 @@ public class Indeed {
 
     public void startSearching(String query, String location) {
         Integer totalSearchResults;
-        searchProgress = new SearchProgress();
 
         try {
             totalSearchResults = getTotalSearchResults(query, location, limit);
 
-            searchProgress.setTotal(totalSearchResults);
             List <SearchResult> searchResults = getNewJobs(query, location, limit);
 
             System.out.println("b4 saving");

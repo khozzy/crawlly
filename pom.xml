@@ -6,34 +6,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.khozzy</groupId>
     <artifactId>crawler</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
     <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <glassfish.glassfishDirectory>/home/khozzy/glassfish4/</glassfish.glassfishDirectory>
-        <glassfish.user>admin</glassfish.user>
-        <glassfish.adminPassword>changeit</glassfish.adminPassword>
-        <glassfish.domain.name>domain1</glassfish.domain.name>
-        <glassfish.domain.host>localhost</glassfish.domain.host>
-        <glassfish.domain.adminPort>4848</glassfish.domain.adminPort>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>prime-repo</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>http://repository.primefaces.org</url>
-            <layout>default</layout>
-        </repository>
-
-        <repository>
-            <id>googlecode.com</id>
-            <url>http://gmaps4jsf.googlecode.com/svn/trunk/gmaps4jsf-repo</url>
-        </repository>
-
-</repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -64,46 +42,8 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
+            <version>6.0</version>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>3.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>1.0.9</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.gmaps4jsf</groupId>
-            <artifactId>gmaps4jsf-core</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <!-- Workaround for using Primefaces -->
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-
-        <!-- For exporting data -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.7</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.lowagie</groupId>
-            <artifactId>itext</artifactId>
-            <version>2.1.7</version>
         </dependency>
 
         <!-- For building URLs -->
@@ -118,7 +58,6 @@
             <artifactId>libphonenumber</artifactId>
             <version>3.1</version>
         </dependency>
-
 
         <!-- Testing -->
         <dependency>
@@ -154,18 +93,9 @@
             <scope>test</scope>
             <version>1.0</version>
         </dependency>
-
-        <!-- Nie wiem czy to jest potrzebne -->
-        <dependency>
-            <groupId>org.glassfish.main.extras</groupId>
-            <artifactId>glassfish-embedded-all</artifactId>
-            <version>3.1.2</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>
-
         <testResources>
             <testResource>
                 <directory>src/test/resources</directory>
@@ -180,34 +110,6 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.glassfish.maven.plugin</groupId>
-                <artifactId>maven-glassfish-plugin</artifactId>
-                <version>2.1</version>
-                <configuration>
-                    <terse>false</terse>
-                    <echo>true</echo>
-                    <debug>true</debug>
-                    <glassfishDirectory>${glassfish.glassfishDirectory}</glassfishDirectory>
-                    <user>${glassfish.user}</user>
-                    <adminPassword>${glassfish.adminPassword}</adminPassword>
-
-                    <domain>
-                        <name>${glassfish.domain.name}</name>
-                        <host>${glassfish.domain.host}</host>
-                        <adminPort>${glassfish.domain.adminPort}</adminPort>
-                    </domain>
-
-                    <components>
-                        <component>
-                            <name>${project.artifactId}</name>
-                            <artifact>${project.build.directory}/${project.build.finalName}.war</artifact>
-                        </component>
-                    </components>
-
                 </configuration>
             </plugin>
 
@@ -234,6 +136,21 @@
                         </derby.stream.error.file>
                     </systemPropertyVariables>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>7.4.Final</version>
+
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>

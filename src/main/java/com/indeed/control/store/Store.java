@@ -1,8 +1,5 @@
 package com.indeed.control.store;
 
-
-import org.primefaces.model.SortOrder;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
