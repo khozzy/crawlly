@@ -1,4 +1,4 @@
-package com.indeed.entity;
+package com.indeed.domain.search_result;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;

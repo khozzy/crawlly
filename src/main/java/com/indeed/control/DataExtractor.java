@@ -3,14 +3,13 @@ package com.indeed.control;
 import com.google.i18n.phonenumbers.PhoneNumberMatch;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.indeed.builder.EmployerWebSiteURIBuilder;
-import com.indeed.entity.SearchResult;
-import com.indeed.entity.SearchResultEmail;
-import com.indeed.entity.SearchResultPhone;
+import com.indeed.domain.search_result.SearchResult;
+import com.indeed.domain.search_result.SearchResultEmail;
+import com.indeed.domain.search_result.SearchResultPhone;
 import org.apache.commons.io.IOUtils;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.Transient;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;

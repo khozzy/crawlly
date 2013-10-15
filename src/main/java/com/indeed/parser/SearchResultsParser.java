@@ -1,7 +1,7 @@
 package com.indeed.parser;
 
-import com.indeed.entity.ParsingSearchResults;
-import com.indeed.entity.SearchResult;
+import com.indeed.domain.search_result.ParsingSearchResults;
+import com.indeed.domain.search_result.SearchResult;
 
 import javax.ejb.Stateless;
 import javax.json.Json;

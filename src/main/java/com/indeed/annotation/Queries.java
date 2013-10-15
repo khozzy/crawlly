@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Qualifier
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Progress {
+public @interface Queries {
 }

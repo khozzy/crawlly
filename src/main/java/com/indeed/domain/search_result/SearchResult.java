@@ -1,4 +1,4 @@
-package com.indeed.entity;
+package com.indeed.domain.search_result;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -61,10 +61,13 @@ public class SearchResult implements Comparable<SearchResult>{
     private Boolean sponsorded;
 
     @Column(name = "expired")
-    private Boolean expired;
+    private Boolean expired = Boolean.FALSE;
 
     @Column(name = "direct_url")
     private String directUrl;
+
+    @Column(name = "query_type")
+    private String queryType;
 
     @OneToMany(mappedBy = "searchResult", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<SearchResultPhone> phones = new HashSet<>();
@@ -142,6 +145,14 @@ public class SearchResult implements Comparable<SearchResult>{
 
     public void setDirectUrl(String directUrl) {
         this.directUrl = directUrl;
+    }
+
+    public String getQueryType() {
+        return queryType;
+    }
+
+    public void setQueryType(String queryType) {
+        this.queryType = queryType;
     }
 
     public Double getLatitude() {

@@ -1,10 +1,10 @@
-package com.indeed;
+package com.indeed.control;
 
 import com.indeed.builder.SearchURIBuilder;
-import com.indeed.control.DataExtractor;
 import com.indeed.control.store.SearchResultsStore;
-import com.indeed.entity.ParsingSearchResults;
-import com.indeed.entity.SearchResult;
+import com.indeed.domain.query.Query;
+import com.indeed.domain.search_result.ParsingSearchResults;
+import com.indeed.domain.search_result.SearchResult;
 import com.indeed.parser.SearchResultsParser;
 
 import javax.ejb.Stateless;
@@ -51,7 +51,7 @@ public class Indeed {
         return parser.parse().getTotalResults();
     }
 
-    public List<SearchResult> getNewJobs(String query, String location, Integer limit) throws URISyntaxException, IOException, ParseException {
+    protected List<SearchResult> getNewJobs(Query query) throws URISyntaxException, IOException, ParseException {
         System.out.println("Get new jobs started....");
 
         List<SearchResult> newJobs = new ArrayList<>();
@@ -62,7 +62,7 @@ public class Indeed {
         ParsingSearchResults results;
 
         do {
-            uri = searchURIBuilder.getURIForFromage(query, location, position, limit, 15);
+            uri = searchURIBuilder.getURIForFromage(query.getQuery(), query.getLocation(), position, limit, query.getDaysBack());
             System.out.println("uri: " + uri.toString());
 
             URLConnection urlConnection =  uri.toURL().openConnection();
@@ -78,6 +78,7 @@ public class Indeed {
 
                 if (!jobExists(result)) {
                     result = dataExtractor.appendContactData(result);
+                    result.setQueryType(query.getName());
                     newJobs.add(result);
                 }
 
@@ -89,19 +90,11 @@ public class Indeed {
         return newJobs;
     }
 
-    public void startSearching(String query, String location) {
-        Integer totalSearchResults;
-
+    public void search(Query query) {
         try {
-            totalSearchResults = getTotalSearchResults(query, location, limit);
 
-            List <SearchResult> searchResults = getNewJobs(query, location, limit);
-
-            System.out.println("b4 saving");
-            for (SearchResult result : searchResults) {
-                if (!jobExists(result)) {
-                    searchResultsStore.create(result);
-                }
+            for (SearchResult result : getNewJobs(query)) {
+                searchResultsStore.create(result);
             }
 
         } catch (URISyntaxException | IOException | ParseException e) {
