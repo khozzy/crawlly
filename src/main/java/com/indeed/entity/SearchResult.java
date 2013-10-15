@@ -74,6 +74,9 @@ public class SearchResult implements Comparable<SearchResult>{
     @OneToMany(mappedBy = "searchResult", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<SearchResultEmail> emails = new ArrayList<>();
 
+    @Transient
+    private String emailString;
+
     public Long getId() {
         return id;
     }
@@ -223,4 +226,16 @@ public class SearchResult implements Comparable<SearchResult>{
     public int compareTo(SearchResult searchResult) {
         return this.getDate().compareTo(searchResult.getDate());
     }
+
+    public String getEmailString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (SearchResultEmail email : emails) {
+            sb.append(email.getEmail());
+            sb.append(";");
+        }
+
+        return sb.toString();
+    }
+
 }
