@@ -5,9 +5,11 @@ import com.indeed.control.store.SearchResultsStore;
 import com.indeed.domain.query.Query;
 import com.indeed.domain.search_result.SearchResult;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.AccessTimeout;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.io.FileOutputStream;
 import java.util.Set;
@@ -29,7 +31,7 @@ public class OfferManager {
     @Inject
     private ReportManager reportManager;
 
-    @Schedule(minute = "*", hour = "*")
+//    @Schedule(minute = "*", hour = "*")
 //    @Schedule(hour = "23/12", minute = "59")
     @AccessTimeout(value = 0) // concurrent access is not permitted
     public void fetchNewOffers() {
