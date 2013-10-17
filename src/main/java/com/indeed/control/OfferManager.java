@@ -5,10 +5,13 @@ import com.indeed.control.store.SearchResultsStore;
 import com.indeed.domain.query.Query;
 import com.indeed.domain.search_result.SearchResult;
 
+import javax.ejb.AccessTimeout;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Singleton
 public class OfferManager {
@@ -23,17 +26,20 @@ public class OfferManager {
     private SearchResultsStore searchResultsStore;
 
     @Schedule(minute = "*", hour = "*")
+//    @Schedule(hour = "23/12", minute = "59")
+    @AccessTimeout(value = 0) // concurrent access is not permitted
     public void fetchNewOffers() {
-        System.out.println("Scheduled... Fetching new offers");
+        Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Fetching new offers started");
 
         setAllToExpired();
 
         for (Query query : queries) {
-            System.out.println("Searching for " + query.getName());
+            Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Searching for " + query.getName());
+
             indeed.search(query);
         }
 
-        System.out.println("Finished");
+        Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Fetching new offers finished");
     }
 
     @Schedule(dayOfWeek="Sun", hour="12")
@@ -42,7 +48,8 @@ public class OfferManager {
     }
 
     private void setAllToExpired() {
-        System.out.println("Setting all as expired ...");
+        Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Setting all as expired ...");
+
         searchResultsStore.executeNamedQuery(SearchResult.EXPIRE_ALL);
     }
 }
