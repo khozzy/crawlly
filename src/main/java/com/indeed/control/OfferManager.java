@@ -1,16 +1,16 @@
 package com.indeed.control;
 
 import com.indeed.annotation.Queries;
+import com.indeed.control.store.SearchResultsStore;
 import com.indeed.domain.query.Query;
+import com.indeed.domain.search_result.SearchResult;
 
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.util.Set;
 
 @Singleton
-@Startup
 public class OfferManager {
 
     @Inject @Queries
@@ -19,23 +19,30 @@ public class OfferManager {
     @Inject
     private Indeed indeed;
 
-    @Schedule(dayOfWeek="Sun", hour="0")
+    @Inject
+    private SearchResultsStore searchResultsStore;
+
+    @Schedule(minute = "*", hour = "*")
     public void fetchNewOffers() {
+        System.out.println("Scheduled... Fetching new offers");
+
         setAllToExpired();
 
         for (Query query : queries) {
+            System.out.println("Searching for " + query.getName());
             indeed.search(query);
         }
+
+        System.out.println("Finished");
     }
 
     @Schedule(dayOfWeek="Sun", hour="12")
     public void sendMailsWithReports() {
-        // Raport przyrostowy
-        // Raport tylko z nowymi
+
     }
 
     private void setAllToExpired() {
-        // set all offers in db to expired
-        // TODO: Implement
+        System.out.println("Setting all as expired ...");
+        searchResultsStore.executeNamedQuery(SearchResult.EXPIRE_ALL);
     }
 }

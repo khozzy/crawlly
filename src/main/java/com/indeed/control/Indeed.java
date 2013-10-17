@@ -7,6 +7,7 @@ import com.indeed.domain.search_result.ParsingSearchResults;
 import com.indeed.domain.search_result.SearchResult;
 import com.indeed.parser.SearchResultsParser;
 
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.IOException;
@@ -21,6 +22,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Local
 @Stateless
 public class Indeed {
 

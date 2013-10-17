@@ -112,5 +112,11 @@ public abstract class Store<T> implements Serializable{
                 .setMaxResults(pageSize)
                 .getResultList();
     }
+
+    public void executeNamedQuery(String namedQueryName) {
+        Query query = this.em.createNamedQuery(namedQueryName);
+
+        query.executeUpdate();
+    }
 }
 

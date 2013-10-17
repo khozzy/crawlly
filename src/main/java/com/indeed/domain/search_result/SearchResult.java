@@ -13,13 +13,15 @@ import java.util.*;
 @NamedQueries({
         @NamedQuery(name = "SearchResult.findAll", query = "SELECT sr FROM SearchResult sr"),
         @NamedQuery(name = "SearchResult.countTotal", query = "SELECT COUNT(sr) FROM SearchResult sr"),
-        @NamedQuery(name = "SearchResutl.getByJobKey", query = "SELECT sr FROM SearchResult sr WHERE sr.jobKey = :jobKey")
+        @NamedQuery(name = "SearchResult.getByJobKey", query = "SELECT sr FROM SearchResult sr WHERE sr.jobKey = :jobKey"),
+        @NamedQuery(name = "SearchResult.expireAll", query = "UPDATE SearchResult SET expired = true ")
 })
 public class SearchResult implements Comparable<SearchResult>{
 
     public final static String ALL = "SearchResult.findAll";
     public final static String TOTAL = "SearchResult.countTotal";
-    public final static String GET_BY_JOB_KEY = "SearchResutl.getByJobKey";
+    public final static String GET_BY_JOB_KEY = "SearchResult.getByJobKey";
+    public final static String EXPIRE_ALL = "SearchResult.expireAll";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

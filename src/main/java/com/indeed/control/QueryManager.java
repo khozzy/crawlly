@@ -8,6 +8,7 @@ import com.indeed.domain.query.Query;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.enterprise.inject.Produces;
+import java.util.HashSet;
 import java.util.Set;
 
 @Singleton
@@ -17,6 +18,8 @@ public class QueryManager {
 
     @PostConstruct
     public void init() {
+
+        queries = new HashSet<>();
 
         queries.add(new JavaQuery(10));
         queries.add(new PythonQuery(10));
