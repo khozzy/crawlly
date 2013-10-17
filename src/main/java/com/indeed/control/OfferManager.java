@@ -9,6 +9,7 @@ import javax.ejb.AccessTimeout;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
+import java.io.FileOutputStream;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,9 @@ public class OfferManager {
     @Inject
     private SearchResultsStore searchResultsStore;
 
+    @Inject
+    private ReportManager reportManager;
+
     @Schedule(minute = "*", hour = "*")
 //    @Schedule(hour = "23/12", minute = "59")
     @AccessTimeout(value = 0) // concurrent access is not permitted
@@ -35,7 +39,6 @@ public class OfferManager {
 
         for (Query query : queries) {
             Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Searching for " + query.getName());
-
             indeed.search(query);
         }
 
@@ -44,6 +47,12 @@ public class OfferManager {
 
     @Schedule(dayOfWeek="Sun", hour="12")
     public void sendMailsWithReports() {
+        Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Generating reports started");
+
+        FileOutputStream newRecordsXLSFile = reportManager.generateNewReport();
+        FileOutputStream allRecordsXLSFile = reportManager.generateOverallReport();
+
+        Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Generating reports finished");
 
     }
 
@@ -52,4 +61,5 @@ public class OfferManager {
 
         searchResultsStore.executeNamedQuery(SearchResult.EXPIRE_ALL);
     }
+
 }
