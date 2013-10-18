@@ -33,7 +33,6 @@ public class ReportManager {
     private FileOutputStream generateFile() {
         List<SearchResult> searchResults = new ArrayList<>();
 
-        System.out.println("onlyNew = " + onlyNew);
         for (Query query : queries) {
             searchResults.addAll(searchResultsStore.findByQuery(query, onlyNew));
         }
@@ -46,7 +45,6 @@ public class ReportManager {
     public FileOutputStream generateOverallReport() {
         onlyNew = Boolean.FALSE;
         System.out.println("Generating overall report");
-
 
         return generateFile();
     }
