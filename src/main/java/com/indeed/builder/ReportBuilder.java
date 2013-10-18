@@ -3,6 +3,8 @@ package com.indeed.builder;
 import com.indeed.annotation.Queries;
 import com.indeed.domain.query.Query;
 import com.indeed.domain.search_result.SearchResult;
+import com.indeed.domain.search_result.SearchResultEmail;
+import com.indeed.domain.search_result.SearchResultPhone;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -22,7 +24,7 @@ import java.util.logging.Logger;
 @Stateless
 public class ReportBuilder {
 
-    private static final String COLUMNS[] = {"Company", "Job title"};
+    private static final String COLUMNS[] = {"Company", "City", "Fetch date", "Direct URL", "Email", "Phone"};
 
     @Inject @Queries
     private Set<Query> queries;
@@ -31,12 +33,18 @@ public class ReportBuilder {
         System.out.println("Inside ReportBuilder");
 
         Iterator<Query> queryIterator = queries.iterator();
+        Iterator<SearchResultEmail> searchResultEmailIterator;
+        Iterator<SearchResultPhone> searchResultPhoneIterator;
+
         Integer sheetIndex = 0;
         Integer rowIndex;
 
         Workbook wb = new HSSFWorkbook();
         List<Sheet> sheets = new ArrayList<>();
         Row row;
+
+        SearchResultEmail resultEmail;
+        SearchResultPhone resultPhone;
 
         try {
             FileOutputStream fileOut = new FileOutputStream("/tmp/report.xls");
@@ -45,24 +53,48 @@ public class ReportBuilder {
                 Query query = queryIterator.next();
                 sheets.add(wb.createSheet(query.getName()));
 
-                for (int col_i = 0; col_i < COLUMNS.length; col_i++) {
-                    row = sheets.get(sheetIndex).createRow(0);
-                    System.out.println("Setting value for " + col_i + " cell: " + COLUMNS[col_i]);
-                    row.createCell(col_i).setCellValue(COLUMNS[col_i]);
-                }
-
-                rowIndex = 1;
+                rowIndex = 0;
 
                 for (SearchResult searchResult : searchResults) {
 
                     if (searchResult.getQueryType().equals(query.getName())) {
 
-                        row = sheets.get(sheetIndex).createRow(rowIndex);
+                        searchResultEmailIterator = searchResult.getEmails().iterator();
+                        searchResultPhoneIterator = searchResult.getPhones().iterator();
 
-                        row.createCell(0).setCellValue(searchResult.getCompany());
-                        row.createCell(1).setCellValue(searchResult.getJobTitle());
+                        // In case if there are no contact data
+                        if (searchResult.getEmails().isEmpty() && searchResult.getPhones().isEmpty()) {
+                            row = sheets.get(sheetIndex).createRow(rowIndex++);
 
-                        rowIndex++;
+                            row.createCell(0).setCellValue(searchResult.getCompany());
+                            row.createCell(1).setCellValue(searchResult.getCity());
+                            row.createCell(2).setCellValue(searchResult.getDate().toString());
+                            row.createCell(3).setCellValue(searchResult.getDirectUrl());
+                        }
+
+                        while (searchResultEmailIterator.hasNext()) {
+                            resultEmail = searchResultEmailIterator.next();
+
+                            row = sheets.get(sheetIndex).createRow(rowIndex++);
+
+                            row.createCell(0).setCellValue(searchResult.getCompany());
+                            row.createCell(1).setCellValue(searchResult.getCity());
+                            row.createCell(2).setCellValue(searchResult.getDate().toString());
+                            row.createCell(3).setCellValue(searchResult.getDirectUrl());
+                            row.createCell(4).setCellValue(resultEmail.getEmail());
+                        }
+
+                        while (searchResultPhoneIterator.hasNext()) {
+                            resultPhone = searchResultPhoneIterator.next();
+
+                            row = sheets.get(sheetIndex).createRow(rowIndex++);
+
+                            row.createCell(0).setCellValue(searchResult.getCompany());
+                            row.createCell(1).setCellValue(searchResult.getCity());
+                            row.createCell(2).setCellValue(searchResult.getDate().toString());
+                            row.createCell(3).setCellValue(searchResult.getDirectUrl());
+                            row.createCell(5).setCellValue(resultPhone.getPhone());
+                        }
                     }
                 }
 

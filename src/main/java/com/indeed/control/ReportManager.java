@@ -1,6 +1,5 @@
 package com.indeed.control;
 
-
 import com.indeed.annotation.Queries;
 import com.indeed.builder.ReportBuilder;
 import com.indeed.control.store.SearchResultsStore;
