@@ -14,7 +14,9 @@ import java.util.*;
         @NamedQuery(name = "SearchResult.findAll", query = "SELECT sr FROM SearchResult sr"),
         @NamedQuery(name = "SearchResult.countTotal", query = "SELECT COUNT(sr) FROM SearchResult sr"),
         @NamedQuery(name = "SearchResult.getByJobKey", query = "SELECT sr FROM SearchResult sr WHERE sr.jobKey = :jobKey"),
-        @NamedQuery(name = "SearchResult.expireAll", query = "UPDATE SearchResult SET expired = true ")
+        @NamedQuery(name = "SearchResult.expireAll", query = "UPDATE SearchResult SET expired = true "),
+        @NamedQuery(name = "SearchResult.getByQuery", query = "SELECT sr FROM SearchResult sr WHERE sr.queryType = :query"),
+        @NamedQuery(name = "SearchResult.getByQueryAndExpired", query = "SELECT sr FROM SearchResult sr WHERE sr.queryType = :query and sr.expired = :expired")
 })
 public class SearchResult implements Comparable<SearchResult>{
 
@@ -22,6 +24,8 @@ public class SearchResult implements Comparable<SearchResult>{
     public final static String TOTAL = "SearchResult.countTotal";
     public final static String GET_BY_JOB_KEY = "SearchResult.getByJobKey";
     public final static String EXPIRE_ALL = "SearchResult.expireAll";
+    public final static String GET_BY_QUERY = "SearchResult.getByQuery";
+    public final static String GET_BY_QUERY_AND_EXPIRED = "SearchResult.getByQueryAndExpired";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

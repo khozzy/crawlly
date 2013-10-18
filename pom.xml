@@ -93,6 +93,14 @@
             <scope>test</scope>
             <version>1.0</version>
         </dependency>
+
+        <!-- For XLS reports -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.9</version>
+        </dependency>
+
     </dependencies>
 
     <build>

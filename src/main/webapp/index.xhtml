@@ -9,7 +9,10 @@
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
 
-            Hello from crawler frontend
+            <h:form>
+                <h:commandButton action="#{reportManager.generateNewReport}" value="Generate new report" styleClass="btn"/>
+                <h:commandButton action="#{reportManager.generateOverallReport}" value="Generate overall report" styleClass="btn"/>
+            </h:form>
 
         </ui:define>
     </ui:composition>

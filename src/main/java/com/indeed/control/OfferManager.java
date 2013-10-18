@@ -5,11 +5,9 @@ import com.indeed.control.store.SearchResultsStore;
 import com.indeed.domain.query.Query;
 import com.indeed.domain.search_result.SearchResult;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.AccessTimeout;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.io.FileOutputStream;
 import java.util.Set;
