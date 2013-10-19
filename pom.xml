@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.khozzy</groupId>
     <artifactId>crawler</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
     <packaging>war</packaging>
 
     <properties>

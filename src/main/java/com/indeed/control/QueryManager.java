@@ -8,6 +8,7 @@ import javax.ejb.Singleton;
 import javax.enterprise.inject.Produces;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Singleton
 public class QueryManager {

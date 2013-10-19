@@ -66,8 +66,8 @@ public class SearchResult implements Comparable<SearchResult>{
     @Column(name = "sponsored")
     private Boolean sponsorded;
 
-    @Column(name = "expired")
-    private Boolean expired = Boolean.FALSE;
+    @Column(name = "expired", columnDefinition = "INT(1)")
+    private Boolean expired = false;
 
     @Column(name = "direct_url")
     private String directUrl;
