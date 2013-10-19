@@ -1,8 +1,8 @@
 package com.indeed.domain.query;
 
-public class JavaQuery extends Query {
+public class Java_Query extends Query {
 
-    public JavaQuery(Integer howMany) {
+    public Java_Query(Integer howMany) {
         super("Java", "Java", "Ireland", howMany);
     }
 }

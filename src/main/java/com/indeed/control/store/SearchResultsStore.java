@@ -4,11 +4,14 @@ import com.indeed.domain.query.Query;
 import com.indeed.domain.search_result.SearchResult;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Stateless
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class SearchResultsStore extends Store<SearchResult> {
 
     public SearchResultsStore() {

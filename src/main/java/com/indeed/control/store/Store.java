@@ -65,7 +65,7 @@ public abstract class Store<T> implements Serializable{
                 setMaxResults(resultLimit).
                 getResultList();
     }
-
+    @SuppressWarnings("unchecked")
     public List<T> findByNativeQuery(String sql) {
         return this.em.createNativeQuery(sql, type).getResultList();
     }

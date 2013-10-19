@@ -1,9 +1,9 @@
 package com.indeed.domain.query;
 
 
-public class PythonQuery extends Query {
+public class Python_Query extends Query {
 
-    public PythonQuery(Integer howMany) {
+    public Python_Query(Integer howMany) {
         super("Python", "Python", "Ireland", howMany);
     }
 }

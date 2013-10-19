@@ -8,13 +8,11 @@ import com.indeed.domain.search_result.SearchResult;
 
 import javax.ejb.Singleton;
 import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Named
 @Singleton
 public class ReportManager {
 
@@ -29,29 +27,23 @@ public class ReportManager {
 
     private Boolean onlyNew = Boolean.FALSE;
 
-    private FileOutputStream generateFile() {
+    private ByteArrayOutputStream generateFile() {
         List<SearchResult> searchResults = new ArrayList<>();
 
         for (Query query : queries) {
             searchResults.addAll(searchResultsStore.findByQuery(query, onlyNew));
         }
 
-        reportBuilder.build(searchResults);
-
-        return null;
+        return reportBuilder.build(searchResults);
     }
 
-    public FileOutputStream generateOverallReport() {
+    public ByteArrayOutputStream generateOverallReport() {
         onlyNew = Boolean.FALSE;
-        System.out.println("Generating overall report");
-
         return generateFile();
     }
 
-    public FileOutputStream generateNewReport() {
+    public ByteArrayOutputStream generateNewReport() {
         onlyNew = Boolean.TRUE;
-        System.out.println("Generating only new report");
-
         return generateFile();
     }
 }

@@ -12,7 +12,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,8 +29,10 @@ public class ReportBuilder {
     @Inject @Queries
     private Set<Query> queries;
 
-    public void build(List<SearchResult> searchResults) {
+    public ByteArrayOutputStream build(List<SearchResult> searchResults) {
         System.out.println("Inside ReportBuilder");
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         Iterator<Query> queryIterator = queries.iterator();
         Iterator<SearchResultEmail> searchResultEmailIterator;
@@ -47,8 +49,6 @@ public class ReportBuilder {
         SearchResultPhone resultPhone;
 
         try {
-            FileOutputStream fileOut = new FileOutputStream("/tmp/report.xls");
-
             while (queryIterator.hasNext()) {
                 Query query = queryIterator.next();
                 sheets.add(wb.createSheet(query.getName()));
@@ -106,13 +106,13 @@ public class ReportBuilder {
                 sheetIndex++;
             }
 
-            wb.write(fileOut);
-            fileOut.close();
+            wb.write(baos);
         } catch (IOException e) {
             Logger.getLogger(ReportBuilder.class.getName()).log(Level.WARNING, "Cannot save report", e);
         }
 
-
         System.out.println("Report saved");
+
+        return baos;
     }
 }
