@@ -1,5 +1,7 @@
 package com.indeed.control.store;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -25,10 +27,11 @@ public abstract class Store<T> implements Serializable{
         this.type = type;
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public T create(T t) {
         this.em.persist(t);
-//        this.em.flush();
-//        this.em.refresh(t);
+        this.em.flush();
+        this.em.refresh(t);
         return t;
     }
 
