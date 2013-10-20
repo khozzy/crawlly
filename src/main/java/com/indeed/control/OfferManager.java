@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 @Singleton
 public class OfferManager {
 
-    private final String MAIL_RECIPIENTS = "khozzy@gmail.com";
+    private final String MAIL_RECIPIENTS = "khozzy@gmail.com, robert.drymajlo@gmail.com";
 
     @Inject @Queries
     private Set<Query> queries;
@@ -40,7 +40,7 @@ public class OfferManager {
     @Inject
     private Mail mailer;
 
-    @Schedule(hour = "9", minute = "20", timezone = "CET")
+    @Schedule(hour = "23", minute = "59", timezone = "CET")
     @AccessTimeout(value = 0) // concurrent access is not permitted
     public void fetchNewOffers() {
         Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Fetching new offers started");
