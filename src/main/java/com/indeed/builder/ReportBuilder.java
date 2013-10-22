@@ -30,8 +30,6 @@ public class ReportBuilder {
     private Set<Query> queries;
 
     public ByteArrayOutputStream build(List<SearchResult> searchResults) {
-        System.out.println("Inside ReportBuilder");
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         Iterator<Query> queryIterator = queries.iterator();
@@ -110,8 +108,6 @@ public class ReportBuilder {
         } catch (IOException e) {
             Logger.getLogger(ReportBuilder.class.getName()).log(Level.WARNING, "Cannot save report", e);
         }
-
-        System.out.println("Report saved");
 
         return baos;
     }

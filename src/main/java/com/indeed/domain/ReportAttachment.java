@@ -24,4 +24,12 @@ public class ReportAttachment {
 
         return attachment;
     }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public byte[] getContent() {
+        return content;
+    }
 }

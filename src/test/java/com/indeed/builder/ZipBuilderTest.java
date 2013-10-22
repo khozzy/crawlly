@@ -9,6 +9,5 @@ public class ZipBuilderTest {
 
     @Test
     public void doSmth() {
-        zipBuilder.createArchive("/tmp/out.zip");
     }
 }
