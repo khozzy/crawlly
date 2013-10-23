@@ -107,7 +107,6 @@
             <artifactId>dropbox-core-sdk</artifactId>
             <version>[1.7,1.8)</version>
         </dependency>
-
     </dependencies>
 
     <build>
