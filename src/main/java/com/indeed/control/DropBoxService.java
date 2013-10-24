@@ -88,7 +88,7 @@ public class DropBoxService {
         if (file.delete()) {
             Logger.getLogger(DropBoxService.class.getName()).log(Level.INFO, "Report file was deleted");
         } else {
-            Logger.getLogger(DropBoxService.class.getName()).log(Level.WARNING, "Cannot delete file " + location);
+            Logger.getLogger(DropBoxService.class.getName()).log(Level.WARNING, "Cannot delete report file " + location);
         }
     }
 

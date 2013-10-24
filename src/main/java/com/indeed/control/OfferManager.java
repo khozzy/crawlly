@@ -23,11 +23,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Singleton
-@Startup
 public class OfferManager {
 
-//    private final String MAIL_RECIPIENTS = "khozzy@gmail.com, robert.drymajlo@gmail.com, grainne.bagnall@cce.ie";
-    private final String MAIL_RECIPIENTS = "khozzy@gmail.com";
+    private final String MAIL_RECIPIENTS = "khozzy@gmail.com, robert.drymajlo@gmail.com, grainne.bagnall@cce.ie";
 
     @Inject @Queries
     private Set<Query> queries;
@@ -47,7 +45,7 @@ public class OfferManager {
     @Inject
     private DropBoxService dropboxService;
 
-//    @Schedule(hour = "21", minute = "59")
+    @Schedule(hour = "21", minute = "59")
     @AccessTimeout(value = 0) // concurrent access is not permitted
     public void fetchNewOffers() {
         Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Fetching new offers started");
@@ -63,12 +61,15 @@ public class OfferManager {
     }
 
 
-//    @Schedule(hour="6", minute = "0")
+    @Schedule(hour="6", minute = "0")
     public void sendReports() {
         Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Generating reports started");
 
         ReportAttachment newOffersReport = new ReportAttachment(getDateFormatted() + "_Daily_Full.xls", "application/vnd.ms-excel", reportManager.generateNewReport().toByteArray());
         ReportAttachment allOffersReport = new ReportAttachment(getDateFormatted() + "_All_Full.xls", "application/vnd.ms-excel", reportManager.generateOverallReport().toByteArray());
+
+        Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Generating reports finished");
+        Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Start sending reports");
 
         try {
             mailer.send(MAIL_RECIPIENTS, "Job offers reports", createMailBodyText(), newOffersReport, allOffersReport);
@@ -77,7 +78,8 @@ public class OfferManager {
             Logger.getLogger(ReportManager.class.getName()).log(Level.WARNING, "Cannot send reports attachments", e);
         }
 
-        Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Generating reports finished");
+        Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Finished sending reports");
+
     }
 
     private void setAllToExpired() {
@@ -102,22 +104,5 @@ public class OfferManager {
         sb.append(StringUtils.join(queryNames.toArray(), ", "));
 
         return sb.toString();
-    }
-
-
-    @PostConstruct
-    public void init() {
-        Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Generating reports started");
-
-        ReportAttachment newOffersReport = new ReportAttachment(getDateFormatted() + "_Daily_Full.xls", "application/vnd.ms-excel", reportManager.generateNewReport().toByteArray());
-        ReportAttachment allOffersReport = new ReportAttachment(getDateFormatted() + "_All_Full.xls", "application/vnd.ms-excel", reportManager.generateOverallReport().toByteArray());
-
-        try {
-            dropboxService.uploadReports(newOffersReport, allOffersReport);
-        } catch (IOException e) {
-            Logger.getLogger(ReportManager.class.getName()).log(Level.WARNING, "Cannot send reports attachments", e);
-        }
-
-        Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Generating reports finished");
     }
 }
