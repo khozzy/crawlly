@@ -67,13 +67,14 @@ public class OfferManager {
 
         ReportAttachment newOffersReport = new ReportAttachment(getDateFormatted() + "_Daily_Full.xls", "application/vnd.ms-excel", reportManager.generateNewReport().toByteArray());
         ReportAttachment allOffersReport = new ReportAttachment(getDateFormatted() + "_All_Full.xls", "application/vnd.ms-excel", reportManager.generateOverallReport().toByteArray());
+        ReportAttachment newContactsReport = new ReportAttachment(getDateFormatted() + "_Daily_Contacts.xls", "application/vnd.ms-excel", reportManager.generateOnlyDailyContactsReport().toByteArray());
 
         Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Generating reports finished");
         Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Start sending reports");
 
         try {
-            mailer.send(MAIL_RECIPIENTS, "Job offers reports", createMailBodyText(), newOffersReport, allOffersReport);
-            dropboxService.uploadReports(newOffersReport, allOffersReport);
+            mailer.send(MAIL_RECIPIENTS, "Job offers reports", createMailBodyText(), newOffersReport, allOffersReport, newContactsReport);
+            dropboxService.uploadReports(newOffersReport, allOffersReport, newContactsReport);
         } catch (IOException e) {
             Logger.getLogger(ReportManager.class.getName()).log(Level.WARNING, "Cannot send reports attachments", e);
         }

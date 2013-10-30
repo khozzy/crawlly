@@ -25,25 +25,32 @@ public class ReportManager {
     @Inject
     private SearchResultsStore searchResultsStore;
 
-    private Boolean onlyNew = Boolean.FALSE;
-
-    private ByteArrayOutputStream generateFile() {
+    private List<SearchResult> populateReport(Boolean onlyNew) {
         List<SearchResult> searchResults = new ArrayList<>();
 
         for (Query query : queries) {
             searchResults.addAll(searchResultsStore.findByQuery(query, onlyNew));
         }
 
+        return searchResults;
+    }
+
+
+    public ByteArrayOutputStream generateOverallReport() {
+        List<SearchResult> searchResults = populateReport(Boolean.FALSE);
+
         return reportBuilder.build(searchResults);
     }
 
-    public ByteArrayOutputStream generateOverallReport() {
-        onlyNew = Boolean.FALSE;
-        return generateFile();
+    public ByteArrayOutputStream generateNewReport() {
+        List<SearchResult> searchResults = populateReport(Boolean.TRUE);
+
+        return reportBuilder.build(searchResults);
     }
 
-    public ByteArrayOutputStream generateNewReport() {
-        onlyNew = Boolean.TRUE;
-        return generateFile();
+    public ByteArrayOutputStream generateOnlyDailyContactsReport() {
+        List<SearchResult> searchResults = populateReport(Boolean.TRUE);
+
+        return reportBuilder.onlyContactData(searchResults);
     }
 }

@@ -29,6 +29,50 @@ public class ReportBuilder {
     @Inject @Queries
     private Set<Query> queries;
 
+    public ByteArrayOutputStream onlyContactData(List<SearchResult> searchResults) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Integer rowIndex = 0;
+
+        Iterator<SearchResultEmail> emailIterator;
+        Iterator<SearchResultPhone> phoneIterator;
+
+        Workbook wb = new HSSFWorkbook();
+        Sheet sheet = wb.createSheet("Contacts");
+        Row row;
+
+        for (SearchResult searchResult : searchResults) {
+
+            if (!(searchResult.getEmails().isEmpty()) || !(searchResult.getPhones().isEmpty())) {
+                emailIterator = searchResult.getEmails().iterator();
+                phoneIterator = searchResult.getPhones().iterator();
+
+                while (emailIterator.hasNext()) {
+                    row = sheet.createRow(rowIndex++);
+                    row.createCell(0).setCellValue(searchResult.getCompany());
+                    row.createCell(1).setCellValue(emailIterator.next().getEmail());
+                }
+
+                while (phoneIterator.hasNext()) {
+                    row = sheet.createRow(rowIndex++);
+                    row.createCell(0).setCellValue(searchResult.getCompany());
+                    row.createCell(2).setCellValue(phoneIterator.next().getPhone());
+                }
+            }
+        }
+
+        sheet.autoSizeColumn(0);
+        sheet.autoSizeColumn(1);
+        sheet.autoSizeColumn(2);
+
+        try {
+            wb.write(baos);
+        } catch (IOException e) {
+            Logger.getLogger(ReportBuilder.class.getName()).log(Level.WARNING, "Cannot daily new contacts report", e);
+        }
+
+        return baos;
+    }
+
     public ByteArrayOutputStream build(List<SearchResult> searchResults) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
