@@ -60,7 +60,7 @@ public class DropBoxService {
         client = new DbxClient(config, ACCESS_TOKEN);
 
         String reportsZipFileDirectory = "/tmp/";
-        String reportsZipFileName = getDateFormatted() + "_reports.zip";
+        String reportsZipFileName = getDateFormatted() + "_JobOffers.zip";
         String reportsZipLocation = reportsZipFileDirectory + reportsZipFileName;
 
         zipBuilder.createArchiveWithReports(reportsZipLocation, reports);

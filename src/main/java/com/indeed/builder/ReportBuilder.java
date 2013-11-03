@@ -14,10 +14,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,40 +26,40 @@ public class ReportBuilder {
     @Inject @Queries
     private Set<Query> queries;
 
-    public ByteArrayOutputStream onlyContactData(List<SearchResult> searchResults) {
+    public ByteArrayOutputStream onlyContactData(Collection<SearchResultEmail> emails, Collection<SearchResultPhone> phones) {
+        List<SearchResultEmail> emailList = new ArrayList<>(emails);
+        List<SearchResultPhone> phoneList = new ArrayList<>(phones);
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Integer rowIndex = 0;
 
-        Iterator<SearchResultEmail> emailIterator;
-        Iterator<SearchResultPhone> phoneIterator;
-
         Workbook wb = new HSSFWorkbook();
-        Sheet sheet = wb.createSheet("Contacts");
+        Sheet emailSheet = wb.createSheet("Emails");
+        Sheet phoneSheet = wb.createSheet("Phones");
         Row row;
 
-        for (SearchResult searchResult : searchResults) {
+        Collections.sort(emailList);
+        Collections.sort(phoneList);
 
-            if (!(searchResult.getEmails().isEmpty()) || !(searchResult.getPhones().isEmpty())) {
-                emailIterator = searchResult.getEmails().iterator();
-                phoneIterator = searchResult.getPhones().iterator();
-
-                while (emailIterator.hasNext()) {
-                    row = sheet.createRow(rowIndex++);
-                    row.createCell(0).setCellValue(searchResult.getCompany());
-                    row.createCell(1).setCellValue(emailIterator.next().getEmail());
-                }
-
-                while (phoneIterator.hasNext()) {
-                    row = sheet.createRow(rowIndex++);
-                    row.createCell(0).setCellValue(searchResult.getCompany());
-                    row.createCell(2).setCellValue(phoneIterator.next().getPhone());
-                }
-            }
+        for (SearchResultPhone phone : phoneList) {
+            row = phoneSheet.createRow(rowIndex++);
+            row.createCell(0).setCellValue(phone.getSearchResult().getCompany());
+            row.createCell(1).setCellValue(phone.getPhone());
         }
 
-        sheet.autoSizeColumn(0);
-        sheet.autoSizeColumn(1);
-        sheet.autoSizeColumn(2);
+        rowIndex = 0;
+
+        for (SearchResultEmail email : emailList) {
+            row = emailSheet.createRow(rowIndex++);
+            row.createCell(0).setCellValue(email.getSearchResult().getCompany());
+            row.createCell(1).setCellValue(email.getEmail());
+        }
+
+        emailSheet.autoSizeColumn(0);
+        emailSheet.autoSizeColumn(1);
+
+        phoneSheet.autoSizeColumn(0);
+        phoneSheet.autoSizeColumn(1);
 
         try {
             wb.write(baos);
@@ -73,7 +70,7 @@ public class ReportBuilder {
         return baos;
     }
 
-    public ByteArrayOutputStream build(List<SearchResult> searchResults) {
+    public ByteArrayOutputStream build(Collection<SearchResult> searchResults) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         Iterator<Query> queryIterator = queries.iterator();

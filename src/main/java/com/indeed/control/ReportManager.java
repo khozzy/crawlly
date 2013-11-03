@@ -5,13 +5,13 @@ import com.indeed.builder.ReportBuilder;
 import com.indeed.control.store.SearchResultsStore;
 import com.indeed.domain.query.Query;
 import com.indeed.domain.search_result.SearchResult;
+import com.indeed.domain.search_result.SearchResultEmail;
+import com.indeed.domain.search_result.SearchResultPhone;
 
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Singleton
 public class ReportManager {
@@ -48,9 +48,23 @@ public class ReportManager {
         return reportBuilder.build(searchResults);
     }
 
-    public ByteArrayOutputStream generateOnlyDailyContactsReport() {
-        List<SearchResult> searchResults = populateReport(Boolean.TRUE);
+    public ByteArrayOutputStream generateFullContactsReport() {
+        List<SearchResult> searchResults = populateReport(Boolean.FALSE);
 
-        return reportBuilder.onlyContactData(searchResults);
+        Set<SearchResultEmail> uniqueEmails = new HashSet<>();
+        Set<SearchResultPhone> uniquePhones = new HashSet<>();
+
+        for (SearchResult searchResult : searchResults) {
+            for (SearchResultEmail email : searchResult.getEmails()) {
+                uniqueEmails.add(email);
+            }
+
+            for (SearchResultPhone phone : searchResult.getPhones()) {
+                uniquePhones.add(phone);
+            }
+        }
+
+        return reportBuilder.onlyContactData(uniqueEmails, uniquePhones);
     }
+
 }

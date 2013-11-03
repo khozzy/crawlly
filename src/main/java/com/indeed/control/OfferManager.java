@@ -7,11 +7,9 @@ import com.indeed.domain.query.Query;
 import com.indeed.domain.search_result.SearchResult;
 import org.apache.commons.lang.StringUtils;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.AccessTimeout;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -67,7 +65,7 @@ public class OfferManager {
 
         ReportAttachment newOffersReport = new ReportAttachment(getDateFormatted() + "_Daily_Full.xls", "application/vnd.ms-excel", reportManager.generateNewReport().toByteArray());
         ReportAttachment allOffersReport = new ReportAttachment(getDateFormatted() + "_All_Full.xls", "application/vnd.ms-excel", reportManager.generateOverallReport().toByteArray());
-        ReportAttachment newContactsReport = new ReportAttachment(getDateFormatted() + "_Daily_Contacts.xls", "application/vnd.ms-excel", reportManager.generateOnlyDailyContactsReport().toByteArray());
+        ReportAttachment newContactsReport = new ReportAttachment(getDateFormatted() + "_Full_Contacts.xls", "application/vnd.ms-excel", reportManager.generateFullContactsReport().toByteArray());
 
         Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Generating reports finished");
         Logger.getLogger(OfferManager.class.getName()).log(Level.INFO, "Start sending reports");

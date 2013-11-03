@@ -1,12 +1,15 @@
 package com.indeed.domain.search_result;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
 @Table(name = "search_result_email")
-public class SearchResultEmail {
+public class SearchResultEmail implements Comparable<SearchResultEmail> {
 
     @Id
     @GeneratedValue
@@ -48,6 +51,27 @@ public class SearchResultEmail {
 
     public void setSearchResult(SearchResult searchResult) {
         this.searchResult = searchResult;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        SearchResultEmail searchResultEmail = (SearchResultEmail) obj;
+
+        return new EqualsBuilder()
+                .append(searchResultEmail.email, email)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17,31)
+                .append(email)
+                .toHashCode();
+    }
+
+    @Override
+    public int compareTo(SearchResultEmail o) {
+        return this.getSearchResult().getCompany().compareTo(o.getSearchResult().getCompany());
     }
 
     @Override
