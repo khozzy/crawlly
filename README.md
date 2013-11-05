@@ -1,20 +1,25 @@
 #  Indeed Job Crawler
 
-Application for fetching latest jobs offers, parsing corresponding employers website - extracting data.
+Application for fetching latest jobs offers, parsing corresponding employers website - extracting data, and sending results via e-mail or dropbox
 
 ## Technologies & Details
 
 - Java EE7
-- Glassfish 4
-- Primefaces 3.5
+- WildFly 8.0.0.Beta1
 - Java API for JSON Processing (JSR-353)
+- JavaMail
 - MySQL
+- DropBox API
 
 ## Deploying manually: 
 
-Be sure that Glassfish container is properly configured. You will need a proper jdbc connection.
+Be sure that WildFly server is properly configured. You need:
+- mail session
+- jdbc resource
+
+## How to install:
 
 ```
-mvn clean package glassfish:{deploy|redeploy|undeploy}
+mvn clean install
 ```
 
