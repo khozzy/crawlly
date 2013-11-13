@@ -37,6 +37,10 @@ public class QueryManager {
         queries.add(new Delphi_Query(10));
         queries.add(new Perl_Query(10));
         queries.add(new PHP_Query(10));
+        queries.add(new Front_EndQuery(10));
+        queries.add(new FrontEndQuery(10));
+        queries.add(new FrontDashEndQuery(10));
+        queries.add(new IxUxQuery(10));
     }
 
     @Produces @Queries
